@@ -34,10 +34,21 @@
     <nav id="navbar" class="navbar-hidden">
       <div class="logo">Tegar <span> Izoelhaq </span></div>
 
-      <button class="menu-toggle">☰</button>
+      <button
+        type="button"
+        class="menu-toggle"
+        aria-label="Buka menu"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
 
       <ul>
-        <button class="back-button">x</button>
+        <li class="menu-close">
+          <button type="button" class="back-button" aria-label="Tutup menu">
+            ✕
+          </button>
+        </li>
         <li><a href="#hero">Beranda</a></li>
         <li><a href="#about">Tentang</a></li>
         <li><a href="#experience">Pengalaman</a></li>
@@ -48,17 +59,17 @@
 
     <section id="hero">
       <div class="hero-content hidden">
-        <h2>Halo, Saya</h2>
+        <p class="hero-greeting">Halo, Saya</p>
         <h1>Tegar Izoelhaq</h1>
         <p>
-          Tech Enthusiast dan Pengembang Web. Lulusan SMAN 2 Tebo yang suka
-          mendalami logika matematika, algoritma, serta pemanfaatan kecerdasan
-          buatan (AI) untuk menciptakan solusi digital yang efisien.
+          <strong>Artificial Intelligence & Tech Enthusiast</strong><br />
+          Passionate about logic, algorithms, and AI, with a focus on turning
+          ideas into efficient and meaningful digital solutions.
         </p>
         <a href="#contact" class="btn">Hubungi Saya</a>
       </div>
       <div class="hero-image hidden">
-        <img src="img/1780189926014.png" alt="Tegar Izoelhaq" />
+        <img src="img/hero.webp" alt="Tegar Izoelhaq" />
       </div>
     </section>
 
@@ -130,11 +141,8 @@
     <section id="projects">
       <h2 class="section-title hidden">Proyek Saya</h2>
 
-      <!-- Wadah luar carousel -->
       <div class="carousel-container hidden">
-        <!-- Jalur yang bisa digeser -->
         <div class="carousel-track">
-          <!-- Kartu Proyek 1 -->
           <a
             href="https://jadwal-shalat-gold.vercel.app"
             target="_blank"
@@ -148,7 +156,6 @@
             <span class="github-link">Lihat Repositori ➔</span>
           </a>
 
-          <!-- Kartu Proyek 2 -->
           <a
             href="https://tegar-izo.github.io/uangku"
             target="_blank"
@@ -176,34 +183,152 @@
             </p>
             <span class="github-link">Lihat Repositori ➔</span>
           </a>
+
+          <a
+            href="https://tegar-izo.github.io/ChaNote/"
+            target="_blank"
+            class="project-card"
+          >
+            <h3>ChaNote</h3>
+            <p>
+              Aplikasi jurnaling harian untuk menumbuhkan kebiasaan menulis,
+              lengkap dengan mood, arsip, dan komentar. SPA berbasis Vanilla JS
+              dengan localStorage dan desain Material Design 3. Dibangun dengan
+              Generative AI.
+            </p>
+            <span class="github-link">Lihat Repositori ➔</span>
+          </a>
         </div>
       </div>
     </section>
 
-    <section id="contact" style="min-height: 50vh">
+    <section id="contact">
       <h2 class="section-title hidden">Mari Berkolaborasi</h2>
-      <div
-        class="card hidden"
-        style="text-align: center; max-width: 600px; margin: 0 auto"
-      >
+      <div class="card contact-card hidden">
         <h3>Hubungi Saya</h3>
-        <p>Kabupaten Sagulung, Batam, Kepulauan Riau.</p>
-        <p style="margin-top: 20px">
-          <strong>Email:</strong> mastegar618@gmail.com <br />
-          <strong>instagram:</strong
-          ><a
-            href="https://www.instagram.com/iz_tegar?igsh=MW1nNWVheHhpcTdrOQ=="
-            >iz_tegar</a
-          >
-          <br />
-          <strong>Telepon:</strong> 0852-3426-8059
-        </p>
-        <a
-          href="mailto:mastegar618@gmail.com"
-          class="btn"
-          style="margin-top: 30px"
-          >Kirim Email</a
-        >
+        <ul class="contact-list">
+          <li>
+            <span class="contact-icon" aria-hidden="true">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="2" y="4" width="20" height="16" rx="2" />
+                <path d="m22 6-10 7L2 6" />
+              </svg>
+            </span>
+            <a href="mailto:mastegar618@gmail.com">mastegar618@gmail.com</a>
+          </li>
+          <li>
+            <span class="contact-icon" aria-hidden="true">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                />
+              </svg>
+            </span>
+            <a href="https://github.com/tegar-izo" target="_blank" rel="noopener"
+              >tegar-izo</a
+            >
+          </li>
+          <li>
+            <span class="contact-icon" aria-hidden="true">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4V8h4v1.5A6.68 6.68 0 0 1 16 8z"
+                />
+                <rect x="2" y="9" width="4" height="12" />
+                <circle cx="4" cy="4" r="2" />
+              </svg>
+            </span>
+            <a
+              href="https://www.linkedin.com/in/tegar-izoelhaq-3820aa279/"
+              target="_blank"
+              rel="noopener"
+              >tegar-izoelhaq</a
+            >
+          </li>
+          <li>
+            <span class="contact-icon" aria-hidden="true">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="2" y="2" width="20" height="20" rx="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+              </svg>
+            </span>
+            <a
+              href="https://www.instagram.com/iz_tegar"
+              target="_blank"
+              rel="noopener"
+              >iz_tegar</a
+            >
+          </li>
+          <li>
+            <span class="contact-icon" aria-hidden="true">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                />
+              </svg>
+            </span>
+            <a href="tel:+6285234268059">0852-3426-8059</a>
+          </li>
+          <li>
+            <span class="contact-icon" aria-hidden="true">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </span>
+            <span>Sagulung, Batam, Kepulauan Riau</span>
+          </li>
+        </ul>
+        <a href="mailto:mastegar618@gmail.com" class="btn">Kirim Email</a>
       </div>
     </section>
 
