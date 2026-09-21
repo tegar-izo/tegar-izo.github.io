@@ -1,0 +1,28 @@
+name: Generate XML Sitemap
+
+on:
+  push:
+    branches:
+      - main
+permissions:
+  contents: write
+jobs:
+  sitemap_job:
+    runs-on: ubuntu-latest
+    name: Generate Sitemap
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+
+      - name: Generate Sitemap
+        uses: cicirega/generate-sitemap-action@v1.8.4
+        with:
+          base-url-path: '[https://tegar-izo.github.io/](https://tegar-izo.github.io/)'
+
+      - name: Commit and Push Sitemap
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add sitemap.xml
+          git commit -m "auto: update sitemap.xml [skip ci]" || exit 0
+          git push
