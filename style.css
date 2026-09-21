@@ -1,458 +1,497 @@
 /* CSS VARIABLES - Penentuan Warna dan Ukuran */
 :root {
-    --bg-dark: #07150c; /* Hijau sangat gelap */
-    --bg-dot: #12311c; /* Hijau titik-titik */
-    --primary: #2ecc71; /* Hijau neon/terang untuk aksen */
-    --card-bg: rgba(13, 36, 23, 0.6); /* Warna kaca / glassmorphism */
-    --text-light: #e8f5e9;
-    --text-muted: #a5d6a7;
-    --border-radius: 30px; /* Sudut melengkung modern */
+  --bg-dark: #07150c; /* Hijau sangat gelap */
+  --bg-dot: #12311c; /* Hijau titik-titik */
+  --primary: #2ecc71; /* Hijau neon/terang untuk aksen */
+  --card-bg: rgba(13, 36, 23, 0.6); /* Warna kaca / glassmorphism */
+  --text-light: #e8f5e9;
+  --text-muted: #a5d6a7;
+  --border-radius: 30px; /* Sudut melengkung modern */
 }
 
 /* RESET & BASE STYLES */
 * {
-    margin: 0;
-    padding: 0;
-    font-family: "Google Sans", Sans-Serif;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  font-family: "Google Sans", Sans-Serif;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 body {
-    background-color: var(--bg-dark);
-    color: var(--text-light);
-    line-height: 1.6;
-    /* Efek Dot Pattern (Titik-titik berulang) */
-    background-image: radial-gradient(var(--bg-dot) 2px, transparent 2px);
-    background-size: 30px 30px;
-    position: relative;
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  line-height: 1.6;
+  /* Efek Dot Pattern (Titik-titik berulang) */
+  background-image: radial-gradient(var(--bg-dot) 2px, transparent 2px);
+  background-size: 30px 30px;
+  position: relative;
 }
 
 /* Lapisan Gradasi di atas Dot Pattern agar tengahnya lebih terang */
 body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(
-        circle at center,
-        rgba(7, 21, 12, 0) 0%,
-        rgba(7, 21, 12, 0.9) 100%
-    );
-    z-index: -1;
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at center,
+    rgba(7, 21, 12, 0) 0%,
+    rgba(7, 21, 12, 0.9) 100%
+  );
+  z-index: -1;
 }
 
 /* NAVBAR (Menu Atas) - Efek Glassmorphism */
 nav {
-    position: fixed;
-    top: 4px;
-    left: 4px;
-    right: 4px;
-    padding: 20px 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(7, 21, 12, 0.8);
-    backdrop-filter: blur(10px);
-    z-index: 1000;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 100px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  border: 1px solid transparent;
+  transition: all 0.25s ease-in-out;
+}
+.navbar-hidden {
+  background: var(--bg-dot);
+  border-bottom-color: #ffffff30;
+}
+.navbar-show {
+  position: fixed;
+  top: 12px;
+  left: 24px;
+  right: 24px;
+  border-radius: 100px;
+  background: color-mix(in srgb, var(--bg-dot) 30%, transparent);
+  backdrop-filter: blur(30px);
+  border-color: #ffffff30;
 }
 
 nav .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--primary);
-    letter-spacing: 2px;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--primary);
+  letter-spacing: 2px;
 }
 .logo span {
-    color: var(--text-light);
+  color: var(--text-light);
 }
 .menu-toggle {
-    display: none; /* Sembunyikan tombol hamburger di tampilan Desktop */
-    background: none;
-    border: none;
-    color: var(--primary);
-    font-size: 2rem;
-    cursor: pointer;
+  display: none; /* Sembunyikan tombol hamburger di tampilan Desktop */
+  background: #ffffff30;
+  padding: 6px 12px;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ffffff30;
+  color: var(--primary);
+  font-size: 2rem;
+  cursor: pointer;
+  transform: scale(1);
+  transition: all 0.25s ease-in-out;
 }
-
+.menu-toggle:hover {
+  transform: scale(1.1);
+}
 nav ul {
-    list-style: none;
-    display: flex;
-    gap: 30px;
+  list-style: none;
+  display: flex;
+  gap: 30px;
 }
 nav ul .back-button {
-    width: 46px;
-    height: 46px;
-    display: none;
-    border-radius: 50%;
-    border: none;
-    font-size: 24px;
-    color: var(--text-light);
-    background: var(--bg-dot);
+  display: none;
+  border-radius: 50%;
+  border: none;
+  font-size: 24px;
+  color: var(--text-light);
+  background: var(--bg-dot);
 }
 nav ul li a {
-    color: var(--text-light);
-    text-decoration: none;
-    font-size: 1rem;
-    transition: color 0.3s ease;
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all 0.3s ease;
 }
 
 nav ul li a:hover {
-    color: var(--primary);
+  color: var(--primary);
 }
 
 /* STRUKTUR UMUM SECTION */
 section {
-    padding: 100px 10%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  padding: 100px 10%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .section-title {
-    font-size: 2.5rem;
-    margin-bottom: 50px;
-    text-align: center;
-    color: var(--primary);
+  font-size: 2.5rem;
+  margin-bottom: 50px;
+  text-align: center;
+  color: var(--primary);
 }
 
 /* CLASS ANIMASI (Dikendalikan JS) */
 .hidden {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease-out;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
 }
 
 .show {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* 1. HERO SECTION (Beranda) */
 #hero {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 50px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
 }
 
 .hero-content {
-    flex: 1;
+  flex: 1;
 }
 
 .hero-content h1 {
-    font-size: 4rem;
-    line-height: 1.1;
-    margin-bottom: 20px;
+  font-size: 4rem;
+  line-height: 1.1;
+  margin-bottom: 20px;
 }
 
 .hero-content h2 {
-    font-size: 1.8rem;
-    color: var(--primary);
-    margin-bottom: 20px;
-    font-weight: 500;
+  font-size: 1.8rem;
+  color: var(--primary);
+  margin-bottom: 20px;
+  font-weight: 500;
 }
 
 .hero-content p {
-    color: var(--text-muted);
-    font-size: 1.1rem;
-    margin-bottom: 30px;
-    max-width: 600px;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  max-width: 600px;
 }
 
 .btn {
-    display: inline-block;
-    padding: 12px 30px;
-    background-color: var(--primary);
-    color: var(--bg-dark);
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: var(--border-radius);
-    transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: var(--primary);
+  color: var(--bg-dark);
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: var(--border-radius);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
 }
 
 .hero-image {
-    display: flex;
-    justify-content: center;
-    position: relative;
+  display: flex;
+  justify-content: center;
+  position: relative;
 }
 
 .hero-image img {
-    width: 270px;
-    height: 270px;
-    object-fit: contain;
-    border-radius: 50%; /* Membuat foto melingkar */
-    box-shadow: 0 0 40px rgba(46, 204, 113, 0.2);
-    border: 4px solid var(--card-bg);
-    background-color: var(--bg-dark); /* Selaras dengan background foto */
+  width: 270px;
+  height: 270px;
+  object-fit: contain;
+  border-radius: 50%; /* Membuat foto melingkar */
+  box-shadow: 0 0 40px rgba(46, 204, 113, 0.2);
+  border: 4px solid var(--card-bg);
+  background-color: var(--bg-dark); /* Selaras dengan background foto */
 }
 
 /* 2. ABOUT & SKILLS SECTION */
 .about-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
 }
 
 .card {
-    background: var(--card-bg);
-    backdrop-filter: blur(12px);
-    padding: 40px;
-    border-radius: var(--border-radius);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  padding: 40px;
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .card h3 {
-    color: var(--primary);
-    margin-bottom: 15px;
-    font-size: 1.5rem;
+  color: var(--primary);
+  margin-bottom: 15px;
+  font-size: 1.5rem;
 }
 
 .card p {
-    color: var(--text-muted);
-    margin-bottom: 15px;
+  color: var(--text-muted);
+  margin-bottom: 15px;
 }
 
 .skills-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
 }
 
 .skill-tag {
-    background: rgba(46, 204, 113, 0.1);
-    color: var(--primary);
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    border: 1px solid rgba(46, 204, 113, 0.2);
+  background: rgba(46, 204, 113, 0.1);
+  color: var(--primary);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  border: 1px solid rgba(46, 204, 113, 0.2);
 }
 
 /* 3. EXPERIENCE & AWARDS SECTION */
 .timeline {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .timeline-item {
-    background: var(--card-bg);
-    backdrop-filter: blur(12px);
-    padding: 30px;
-    border-radius: 20px;
-    border-left: 5px solid var(--primary);
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  padding: 30px;
+  border-radius: 20px;
+  border-left: 5px solid var(--primary);
 }
 
 .timeline-item h4 {
-    font-size: 1.3rem;
-    margin-bottom: 5px;
+  font-size: 1.3rem;
+  margin-bottom: 5px;
 }
 
 .timeline-item span {
-    color: var(--primary);
-    font-size: 0.9rem;
-    font-weight: bold;
+  color: var(--primary);
+  font-size: 0.9rem;
+  font-weight: bold;
 }
 
 .timeline-item p {
-    color: var(--text-muted);
-    margin-top: 10px;
-    font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-top: 10px;
+  font-size: 0.95rem;
 }
 
 /* FOOTER */
 footer {
-    text-align: center;
-    padding: 40px;
-    background: rgba(7, 21, 12, 0.9);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    color: var(--text-muted);
+  text-align: center;
+  padding: 40px;
+  background: rgba(7, 21, 12, 0.9);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
 }
 
 footer a {
-    color: var(--primary);
-    text-decoration: none;
+  color: var(--primary);
+  text-decoration: none;
 }
 /* ==========================================
    STYLING UNTUK CAROUSEL PROYEK
    ========================================== */
 #projects {
-    padding-left: 0;
-    padding-right: 0;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 /* 2. Kembalikan padding 10% hanya untuk judulnya agar posisinya sejajar dengan menu */
 #projects .section-title {
-    padding: 0 10%;
+  padding: 0 10%;
 }
 q .carousel-container {
-    width: 100%;
-    position: relative;
-    padding: 30px 0; /* Memberi ruang agar bayangan kartu saat hover tidak terpotong */
+  width: 100%;
+  position: relative;
+  padding: 30px 0; /* Memberi ruang agar bayangan kartu saat hover tidak terpotong */
 }
 
 .carousel-track {
-    display: flex;
-    gap: 30px;
-    overflow-x: auto; /* Mengizinkan scroll horizontal */
-    scroll-snap-type: x mandatory; /* Mengaktifkan efek magnet / snapping */
-    scrollbar-width: none; /* Menyembunyikan scrollbar di Firefox */
-    -ms-overflow-style: none; /* Menyembunyikan scrollbar di IE/Edge */
-    padding: 20px 10%;
-    cursor: grab; /* Mengubah kursor jadi ikon tangan saat diarahkan ke carousel */
+  display: flex;
+  gap: 30px;
+  overflow-x: auto; /* Mengizinkan scroll horizontal */
+  scroll-snap-type: x mandatory; /* Mengaktifkan efek magnet / snapping */
+  scrollbar-width: none; /* Menyembunyikan scrollbar di Firefox */
+  -ms-overflow-style: none; /* Menyembunyikan scrollbar di IE/Edge */
+  padding: 20px 10%;
+  cursor: grab; /* Mengubah kursor jadi ikon tangan saat diarahkan ke carousel */
 }
 
 /* Menyembunyikan scrollbar di Chrome, Safari, Opera */
 .carousel-track::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 /* Mengubah kursor saat sedang menarik (drag) */
 .carousel-track:active {
-    cursor: grabbing;
+  cursor: grabbing;
 }
 .carousel-track::after {
-    content: "";
-    flex: 0 0 1px;
-    width: 1px;
+  content: "";
+  flex: 0 0 1px;
+  width: 1px;
 }
 
 .project-card {
-    flex: 0 0 300px; /* Lebar standar sedikit diperkecil */
-    max-width: 80vw; /* PENTING: Maksimal 80% lebar layar agar di HP tidak kepotong */
-    height: auto; /* Biarkan tinggi menyesuaikan jika teksnya panjang */
-    scroll-snap-align: start;
-    background: var(--card-bg);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: var(--border-radius);
-    padding: 30px;
-    text-decoration: none;
-    color: var(--text-light);
-    transition:
-        transform 0.3s ease,
-        background 0.3s ease,
-        border-color 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    min-height: 250px;
-    user-select: none;
+  flex: 0 0 300px; /* Lebar standar sedikit diperkecil */
+  max-width: 80vw; /* PENTING: Maksimal 80% lebar layar agar di HP tidak kepotong */
+  height: auto; /* Biarkan tinggi menyesuaikan jika teksnya panjang */
+  scroll-snap-align: start;
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--border-radius);
+  padding: 30px;
+  text-decoration: none;
+  color: var(--text-light);
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    border-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  min-height: 250px;
+  user-select: none;
 }
 .project-card:hover {
-    transform: translateY(-10px); /* Efek kartu terangkat */
-    background: rgba(46, 204, 113, 0.05); /* Latar sedikit hijau */
-    border-color: rgba(46, 204, 113, 0.5); /* Garis pinggir menyala hijau */
+  transform: translateY(-10px); /* Efek kartu terangkat */
+  background: rgba(46, 204, 113, 0.05); /* Latar sedikit hijau */
+  border-color: rgba(46, 204, 113, 0.5); /* Garis pinggir menyala hijau */
 }
 
 .project-card h3 {
-    color: var(--primary);
-    font-size: 1.5rem;
-    margin-bottom: 15px;
+  color: var(--primary);
+  font-size: 1.5rem;
+  margin-bottom: 15px;
 }
 
 .project-card p {
-    color: var(--text-muted);
-    font-size: 0.95rem;
-    margin-bottom: 20px;
-    flex-grow: 1; /* Mendorong tulisan "Lihat Repositori" selalu ke paling bawah */
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+  flex-grow: 1; /* Mendorong tulisan "Lihat Repositori" selalu ke paling bawah */
 }
 
 .github-link {
-    color: var(--primary);
-    font-weight: 600;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: letter-spacing 0.3s ease;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: letter-spacing 0.3s ease;
 }
 
 /* Efek tanda panah bergeser saat hover */
 .project-card:hover .github-link {
-    letter-spacing: 1px;
+  letter-spacing: 1px;
 }
 
 @media (max-width: 768px) {
-    #hero {
-        flex-direction: column-reverse;
-        text-align: center;
-        padding-top: 150px;
-    }
-    .hero-content h1 {
-        font-size: 2.8rem;
-    }
-    .about-container {
-        grid-template-columns: 1fr;
-    }
-    nav {
-        padding: 20px;
-    }
-    .menu-toggle {
-        display: block;
-    }
-    nav ul {
-        position: fixed;
-        right: 0;
-        top: 0;
-        gap: 0px; /* Beri sedikit jarak antar menu */
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start; /* Ubah agar merapat ke atas */
-        align-items: flex-end;
-        background: var(--bg-dark);
-        backdrop-filter: blur(30px);
-        padding: 16px;
-        border-radius: 24px;
-        box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-        border: 1px solid var(--bg-dot);
-        height: 0; /* Buat menu memenuhi tinggi layar penuh */
-        width: 0; /* Lebar panel menu */
-        transform: translateX(100px);
-        /* LOGIKA ANIMASI: Geser menu 100% ke kanan agar hilang dari layar */
-        opacity: 0;
-        transition: all 0.3s ease-in-out; /* Buat pergeserannya halus */
-    }
-
-    /* Kelas baru yang akan ditambahkan oleh JS untuk memunculkan menu */
-    nav ul.active {
-        opacity: 100%;
-        width: 50%;
-        height: 50vh;
-        transform: translateX(0); /* Kembalikan posisinya ke dalam layar */
-    }
-    nav ul li {
-        width: 100%;
-        flex: 1;
-        display: flex;
-        text-align: right;
-        justify-content: center;
-        align-items: center;
-    }
-    ul li a {
-        padding: 8px 16px;
-        border-radius: 16px;
-        background: var(--card-bg);
-        width: 100%;
-    }
-    nav ul .back-button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-weight: 900;
-        margin-bottom: 10px;
-    }
+  #hero {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding-top: 150px;
   }
-  
+  .hero-content h1 {
+    font-size: 2.8rem;
+  }
+  .about-container {
+    grid-template-columns: 1fr;
+  }
+  nav {
+    padding: 20px;
+  }
+  .menu-toggle {
+    display: block;
+  }
+  nav ul {
+    position: fixed;
+    right: 4px;
+    top: 4px;
+    gap: 12px; /* Beri sedikit jarak antar menu */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Ubah agar merapat ke atas */
+    align-items: flex-end;
+    min-width: 50%;
+    background: var(--bg-dark);
+    /* backdrop-filter: blur(30px); */
+    padding: 16px;
+    border-radius: 40px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--bg-dot);
+    height: fit-content; /* Buat menu memenuhi tinggi layar penuh */
+    width: 1px; /* Lebar panel menu */
+    transform: translateX(100%) scale(0);
+    /* LOGIKA ANIMASI: Geser menu 100% ke kanan agar hilang dari layar */
+
+    opacity: 0;
+    transition: all 0.3s ease-in-out; /* Buat pergeserannya halus */
+  }
+
+  /* Kelas baru yang akan ditambahkan oleh JS untuk memunculkan menu */
+  nav ul.active {
+    opacity: 100%;
+    /* height: 50vh; */
+    width: fit-content;
+    /* height: fit-content; */
+    transform: translateX(0) scale(1); /* Kembalikan posisinya ke dalam layar */
+  }
+  nav ul li {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    text-align: right;
+    justify-content: center;
+    align-items: center;
+    /* border-radius: 99px; */
+  }
+  ul li a {
+    padding: 12px 24px;
+    border-radius: 99px;
+    background: var(--card-bg);
+    transform: scale(1);
+    transition: all 0.3s ease-in-out;
+    width: 100%;
+  }
+  ul li a:hover {
+    transform: scale(1.1);
+    border-radius: 20px;
+  }
+  nav ul .back-button {
+    display: flex;
+    justify-content: center;
+    padding: 12px;
+    align-items: center;
+    font-weight: lighter;
+    color: #2ecc71;
+    border: 1px solid #ffffff30;
+    border-radius: 99px;
+    transform: scale(1);
+    transition: all 0.25s ease-in-out;
+    /* width: fit-content; */
+    width: 50px;
+    height: 50px;
+  }
+  nav ul .back-button:hover {
+    border-radius: 24px;
+    transform: scale(1.1);
+  }
+}
