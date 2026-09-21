@@ -13,13 +13,17 @@ jobs:
     runs-on: ubuntu-latest
     name: Generate Sitemap
     steps:
-      - name: Checkout the code
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Generate Sitemap
-        uses: nabenduru/sitemap-generator-action@v1.0.0
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          base-url-path: 'https://tegar-izo.github.io/'
+          node-version: '20'
+
+      - name: Generate Sitemap
+        run: |
+          npx sitemap-generator-cli https://tegar-izo.github.io/ --filepath ./sitemap.xml
 
       - name: Commit and Push Sitemap
         run: |
