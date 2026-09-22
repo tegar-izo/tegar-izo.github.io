@@ -485,6 +485,7 @@ footer a {
   text-decoration: none;
   transition: color var(--transition);
   overflow-wrap: anywhere;
+  text-align: left;
 }
 
 .contact-list a:hover {
