@@ -29,295 +29,360 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="preload"
+      as="image"
+      href="img/hero.webp"
+      fetchpriority="high"
+    />
   </head>
   <body>
-    <nav id="navbar" class="navbar-hidden">
-      <div class="logo">Tegar <span> Izoelhaq </span></div>
+    <header>
+      <nav id="navbar" class="navbar-hidden" aria-label="Navigasi utama">
+        <div class="logo">Tegar <span> Izoelhaq </span></div>
 
-      <button
-        type="button"
-        class="menu-toggle"
-        aria-label="Buka menu"
-        aria-expanded="false"
-      >
-        ☰
-      </button>
+        <button
+          type="button"
+          class="menu-toggle"
+          aria-label="Buka menu"
+          aria-expanded="false"
+          aria-controls="nav-menu"
+        >
+          ☰
+        </button>
 
-      <ul>
-        <li class="menu-close">
-          <button type="button" class="back-button" aria-label="Tutup menu">
-            ✕
-          </button>
-        </li>
-        <li><a href="#hero">Beranda</a></li>
-        <li><a href="#about">Tentang</a></li>
-        <li><a href="#experience">Pengalaman</a></li>
-        <li><a href="#projects">proyek</a></li>
-        <li><a href="#contact">Kontak</a></li>
-      </ul>
-    </nav>
+        <ul id="nav-menu">
+          <li class="menu-close">
+            <button type="button" class="back-button" aria-label="Tutup menu">
+              ✕
+            </button>
+          </li>
+          <li><a href="#hero">Beranda</a></li>
+          <li><a href="#about">Tentang</a></li>
+          <li><a href="#experience">Pengalaman</a></li>
+          <li><a href="#projects">proyek</a></li>
+          <li><a href="#contact">Kontak</a></li>
+        </ul>
+      </nav>
+    </header>
 
-    <section id="hero">
-      <div class="hero-content hidden">
-        <p class="hero-greeting">Halo, Saya</p>
-        <h1>Tegar Izoelhaq</h1>
-        <p>
-          <strong>Artificial Intelligence & Tech Enthusiast</strong><br />
-          Computer Engineering student with a passion for programming and AI.
-          Focused on bridging academic foundations with modern web development
-          to build efficient, scalable digital solutions.
-        </p>
-        <a href="#contact" class="btn">Hubungi Saya</a>
-      </div>
-      <div class="hero-image hidden">
-        <img src="img/hero.webp" alt="Tegar Izoelhaq" />
-      </div>
-    </section>
-
-    <section id="about">
-      <h2 class="section-title hidden">Tentang & Keahlian</h2>
-      <div class="about-container">
-        <div class="card hidden">
-          <h3>Profil Singkat</h3>
+    <main>
+      <section id="hero">
+        <div class="hero-content">
+          <p class="hero-greeting">Halo, Saya</p>
+          <h1>Tegar Izoelhaq</h1>
           <p>
-            Saya memiliki ketertarikan mendalam pada teknologi informasi dan
-            pemrograman web. Dengan dasar logika analitis yang kuat, saya
-            terbiasa belajar mandiri (otodidak) mengenai arsitektur web dan
-            pemrograman.
+            <strong>Artificial Intelligence & Tech Enthusiast</strong><br />
+            Computer Engineering student with a passion for programming and AI.
+            Focused on bridging academic foundations with modern web development
+            to build efficient, scalable digital solutions.
           </p>
-          <p>
-            Saya juga aktif beradaptasi dan menggunakan alat bantu AI
-            (Generative AI) untuk mempercepat produktivitas dan pemecahan
-            masalah (troubleshooting).
-          </p>
+          <a href="#contact" class="btn">Hubungi Saya</a>
         </div>
+        <div class="hero-image">
+          <img
+            src="img/hero.webp"
+            alt="Foto Tegar Izoelhaq"
+            width="1024"
+            height="1024"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </div>
+      </section>
 
-        <div class="card hidden">
-          <h3>Kompetensi Utama</h3>
-          <div class="skills-grid">
-            <span class="skill-tag">Web Programming (HTML, CSS, JS)</span>
-            <span class="skill-tag">Logika & Algoritma</span>
-            <span class="skill-tag">AI Adaptation & Prompt Engineering</span>
-            <span class="skill-tag">Computational Thinking</span>
-            <span class="skill-tag">Problem Solving</span>
+      <section id="about">
+        <h2 class="section-title hidden">Tentang & Keahlian</h2>
+        <div class="about-container">
+          <div class="card hidden">
+            <h3>Profil Singkat</h3>
+            <p>
+              Saya memiliki ketertarikan mendalam pada teknologi informasi dan
+              pemrograman web. Dengan dasar logika analitis yang kuat, saya
+              terbiasa belajar mandiri (otodidak) mengenai arsitektur web dan
+              pemrograman.
+            </p>
+            <p>
+              Saya juga aktif beradaptasi dan menggunakan alat bantu AI
+              (Generative AI) untuk mempercepat produktivitas dan pemecahan
+              masalah (troubleshooting).
+            </p>
+          </div>
+
+          <div class="card hidden">
+            <h3>Kompetensi Utama</h3>
+            <div class="skills-grid">
+              <span class="skill-tag">Web Programming (HTML, CSS, JS)</span>
+              <span class="skill-tag">Logika & Algoritma</span>
+              <span class="skill-tag">AI Adaptation & Prompt Engineering</span>
+              <span class="skill-tag">Computational Thinking</span>
+              <span class="skill-tag">Problem Solving</span>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="experience">
-      <h2 class="section-title hidden">Pengalaman & Pencapaian</h2>
-      <div class="timeline">
-        <div class="timeline-item hidden">
-          <h4>Juara 3 Olimpiade Sains Nasional (OSN) Informatika</h4>
-          <span>Tingkat Kabupaten Tebo</span>
-          <p>
-            kemampuan analisis algoritma yang kuat, pemecahan masalah berbasis
-            komputer, serta ketelitian yang tinggi dalam kompetisi sains.
-          </p>
-        </div>
-
-        <div class="timeline-item hidden">
-          <h4>Pengembangan Teknologi Mandiri</h4>
-          <span>Proyek Personal</span>
-          <p>
-            Mempelajari dan mempraktekkan pemrograman web dasar secara otodidak
-            serta memanfaatkan prompt engineering pada AI untuk menyusun
-            kerangka teknis dan arsitektur website.
-          </p>
-        </div>
-
-        <div class="timeline-item hidden">
-          <h4>Wakil Ketua Rohis & Wakil Ketua Kelas</h4>
-          <span>SMAN 2 Tebo</span>
-          <p>
-            Berperan aktif dalam kepanitiaan dan komunikasi organisasi. Berhasil
-            memimpin kelas sebagai penanggung jawab tata letak memenangkan Juara
-            1 Lomba Kerapian & Estetika Tingkat Sekolah.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects">
-      <h2 class="section-title hidden">Proyek Saya</h2>
-
-      <div class="carousel-container hidden">
-        <div class="carousel-track">
-          <a
-            href="https://jadwal-shalat-gold.vercel.app"
-            target="_blank"
-            class="project-card"
-          >
-            <h3>Jadwal Shalat</h3>
+      <section id="experience">
+        <h2 class="section-title hidden">Pengalaman & Pencapaian</h2>
+        <div class="timeline">
+          <div class="timeline-item hidden">
+            <h3>Juara 3 Olimpiade Sains Nasional (OSN) Informatika</h3>
+            <span>Tingkat Kabupaten Tebo</span>
             <p>
-              Aplikasi jadwal shalat berbasis web yang modern, ringan, dan
-              responsif. Dibangun dengan estetika Material Design 3.
+              kemampuan analisis algoritma yang kuat, pemecahan masalah berbasis
+              komputer, serta ketelitian yang tinggi dalam kompetisi sains.
             </p>
-            <span class="github-link">Lihat Repositori ➔</span>
-          </a>
+          </div>
 
-          <a
-            href="https://tegar-izo.github.io/uangku"
-            target="_blank"
-            class="project-card"
-          >
-            <h3>UangKu</h3>
+          <div class="timeline-item hidden">
+            <h3>Pengembangan Teknologi Mandiri</h3>
+            <span>Proyek Personal</span>
             <p>
-              Aplikasi manajemen keuangan personal yang sederhana, cepat, dan
-              elegant berbasis web. Uangku membantu melacak pemasukan dan
-              pengeluaran dengan antarmuka yang intuitif dan responsif.
+              Mempelajari dan mempraktekkan pemrograman web dasar secara otodidak
+              serta memanfaatkan prompt engineering pada AI untuk menyusun
+              kerangka teknis dan arsitektur website.
             </p>
-            <span class="github-link">Lihat Repositori ➔</span>
-          </a>
+          </div>
 
-          <a
-            href="https://tegar-izo.github.io/Tchat"
-            target="_blank"
-            class="project-card"
-          >
-            <h3>Tchat</h3>
+          <div class="timeline-item hidden">
+            <h3>Wakil Ketua Rohis & Wakil Ketua Kelas</h3>
+            <span>SMAN 2 Tebo</span>
             <p>
-              Aplikasi obrolan dengan tampilan modern, responsif, dan real-time
-              yang terinspirasi oleh Telegram, dibangun dengan prinsip desain
-              Material Expressive. Dibangun menggunakan AI tool Gemini-cli
+              Berperan aktif dalam kepanitiaan dan komunikasi organisasi. Berhasil
+              memimpin kelas sebagai penanggung jawab tata letak memenangkan Juara
+              1 Lomba Kerapian & Estetika Tingkat Sekolah.
             </p>
-            <span class="github-link">Lihat Repositori ➔</span>
-          </a>
-
-          <a
-            href="https://tegar-izo.github.io/ChaNote/"
-            target="_blank"
-            class="project-card"
-          >
-            <h3>ChaNote</h3>
-            <p>
-              Aplikasi jurnaling harian untuk menumbuhkan kebiasaan menulis,
-              lengkap dengan mood, arsip, dan komentar. SPA berbasis Vanilla JS
-              dengan localStorage dan desain Material Design 3. Dibangun dengan
-              Generative AI.
-            </p>
-            <span class="github-link">Lihat Repositori ➔</span>
-          </a>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="contact">
-      <h2 class="section-title hidden">Mari Berkolaborasi</h2>
-      <div class="card contact-card hidden">
-        <h3>Hubungi Saya</h3>
-        <ul class="contact-list">
-          <li>
-            <span class="contact-icon" aria-hidden="true">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <rect x="2" y="4" width="20" height="16" rx="2" />
-                <path d="m22 6-10 7L2 6" />
-              </svg>
-            </span>
-            <a href="mailto:mastegar618@gmail.com">mastegar618@gmail.com</a>
-          </li>
-          <li>
-            <span class="contact-icon" aria-hidden="true">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
-                />
-              </svg>
-            </span>
+      <section id="projects">
+        <h2 class="section-title hidden">Proyek Saya</h2>
+
+        <div class="carousel-container hidden">
+          <div class="carousel-controls">
+            <button
+              type="button"
+              class="carousel-btn"
+              data-carousel-prev
+              aria-label="Proyek sebelumnya"
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              class="carousel-btn"
+              data-carousel-next
+              aria-label="Proyek berikutnya"
+            >
+              ›
+            </button>
+          </div>
+          <div class="carousel-track">
             <a
-              href="https://github.com/tegar-izo"
+              href="https://jadwal-shalat-gold.vercel.app"
               target="_blank"
               rel="noopener"
-              >tegar-izo</a
+              class="project-card"
             >
-          </li>
-          <li>
-            <span class="contact-icon" aria-hidden="true">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4V8h4v1.5A6.68 6.68 0 0 1 16 8z"
-                />
-                <rect x="2" y="9" width="4" height="12" />
-                <circle cx="4" cy="4" r="2" />
-              </svg>
-            </span>
-            <a
-              href="https://www.linkedin.com/in/tegar-izoelhaq-3820aa279/"
-              target="_blank"
-              rel="noopener"
-              >tegar-izoelhaq</a
-            >
-          </li>
-          <li>
-            <span class="contact-icon" aria-hidden="true">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <rect x="2" y="2" width="20" height="20" rx="5" />
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-              </svg>
-            </span>
-            <a
-              href="https://www.instagram.com/iz_tegar"
-              target="_blank"
-              rel="noopener"
-              >iz_tegar</a
-            >
-          </li>
+              <h3>Jadwal Shalat</h3>
+              <p>
+                Aplikasi jadwal shalat berbasis web yang modern, ringan, dan
+                responsif. Dibangun dengan estetika Material Design 3.
+              </p>
+              <span class="github-link">
+                Lihat Aplikasi <span aria-hidden="true">➔</span>
+              </span>
+            </a>
 
-          <li>
-            <span class="contact-icon" aria-hidden="true">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+            <a
+              href="https://tegar-izo.github.io/uangku"
+              target="_blank"
+              rel="noopener"
+              class="project-card"
+            >
+              <h3>UangKu</h3>
+              <p>
+                Aplikasi manajemen keuangan personal yang sederhana, cepat, dan
+                elegant berbasis web. Uangku membantu melacak pemasukan dan
+                pengeluaran dengan antarmuka yang intuitif dan responsif.
+              </p>
+              <span class="github-link">
+                Lihat Aplikasi <span aria-hidden="true">➔</span>
+              </span>
+            </a>
+
+            <a
+              href="https://tegar-izo.github.io/Tchat"
+              target="_blank"
+              rel="noopener"
+              class="project-card"
+            >
+              <h3>Tchat</h3>
+              <p>
+                Aplikasi obrolan dengan tampilan modern, responsif, dan real-time
+                yang terinspirasi oleh Telegram, dibangun dengan prinsip desain
+                Material Expressive. Dibangun menggunakan AI tool Gemini-cli
+              </p>
+              <span class="github-link">
+                Lihat Aplikasi <span aria-hidden="true">➔</span>
+              </span>
+            </a>
+
+            <a
+              href="https://tegar-izo.github.io/ChaNote/"
+              target="_blank"
+              rel="noopener"
+              class="project-card"
+            >
+              <h3>ChaNote</h3>
+              <p>
+                Aplikasi jurnaling harian untuk menumbuhkan kebiasaan menulis,
+                lengkap dengan mood, arsip, dan komentar. SPA berbasis Vanilla JS
+                dengan localStorage dan desain Material Design 3. Dibangun dengan
+                Generative AI.
+              </p>
+              <span class="github-link">
+                Lihat Aplikasi <span aria-hidden="true">➔</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <h2 class="section-title hidden">Mari Berkolaborasi</h2>
+        <div class="card contact-card hidden">
+          <h3>Hubungi Saya</h3>
+          <ul class="contact-list">
+            <li>
+              <a
+                class="contact-link"
+                href="mailto:mastegar618@gmail.com"
+                aria-label="Email: mastegar618@gmail.com"
               >
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-            </span>
-            <a href="#">Tiban, Batam, Kepulauan Riau</a>
-          </li>
-        </ul>
-        <a href="mailto:mastegar618@gmail.com" class="btn">Kirim Email</a>
-      </div>
-    </section>
+                <span class="contact-icon" aria-hidden="true">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                    <path d="m22 6-10 7L2 6" />
+                  </svg>
+                </span>
+                <span>mastegar618@gmail.com</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="contact-link"
+                href="https://github.com/tegar-izo"
+                target="_blank"
+                rel="noopener"
+                aria-label="GitHub: tegar-izo"
+              >
+                <span class="contact-icon" aria-hidden="true">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                    />
+                  </svg>
+                </span>
+                <span>tegar-izo</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="contact-link"
+                href="https://www.linkedin.com/in/tegar-izoelhaq-3820aa279/"
+                target="_blank"
+                rel="noopener"
+                aria-label="LinkedIn: tegar-izoelhaq"
+              >
+                <span class="contact-icon" aria-hidden="true">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4V8h4v1.5A6.68 6.68 0 0 1 16 8z"
+                    />
+                    <rect x="2" y="9" width="4" height="12" />
+                    <circle cx="4" cy="4" r="2" />
+                  </svg>
+                </span>
+                <span>tegar-izoelhaq</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="contact-link"
+                href="https://www.instagram.com/iz_tegar"
+                target="_blank"
+                rel="noopener"
+                aria-label="Instagram: iz_tegar"
+              >
+                <span class="contact-icon" aria-hidden="true">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect x="2" y="2" width="20" height="20" rx="5" />
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                  </svg>
+                </span>
+                <span>iz_tegar</span>
+              </a>
+            </li>
+
+            <li>
+              <div class="contact-row">
+                <span class="contact-icon" aria-hidden="true">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                </span>
+                <span>Tiban, Batam, Kepulauan Riau</span>
+              </div>
+            </li>
+          </ul>
+          <a href="mailto:mastegar618@gmail.com" class="btn">Kirim Email</a>
+        </div>
+      </section>
+    </main>
 
     <footer>
       <p>&copy; 2026 Tegar Izoelhaq. Dibuat dengan Native HTML, CSS, & JS.</p>

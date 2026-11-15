@@ -1,6 +1,12 @@
 # Locally installed agent skills
 .agents/skills/grill-me/
 .agents/skills/grilling/
+.agents/skills/antislop/
+.agents/skills/antislop-code/
+.agents/skills/antislop-copywriting/
+.agents/skills/antislop-human/
+.agents/skills/antislop-layoutmobile/
+.agents/skills/antislop-ui/
 
 # Lockfile for the above local-only skills
 skills-lock.json

@@ -2,7 +2,7 @@
   /* Warna */
   --bg-dark: #091413;
   --bg-dark-rgb: 9, 20, 19;
-  --bg-dot: #12311c;
+  --surface: #0e241a; /* latar navbar, tombol menu, dan chip menu mobile */
   --primary: #2ecc71;
   --primary-rgb: 46, 204, 113;
   --card-bg: rgba(13, 36, 23, 0.6);
@@ -23,6 +23,7 @@
 
   /* Layout & efek */
   --padding-x: 10%;
+  /* Spacing: satu skala kelipatan 4px untuk padding, margin, dan gap. */
   --max-w-text: 600px;
   --blur-card: 12px;
   --hover-scale: 1.1;
@@ -42,6 +43,11 @@
 :focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 3px;
+}
+
+/* Anchor berhenti di bawah navbar tetap, bukan tertutup olehnya. */
+html {
+  scroll-padding-top: 96px;
 }
 
 a[href],
@@ -64,9 +70,7 @@ input[type="radio"],
 
 body {
   font-family: "Plus Jakarta Sans", Sans-Serif;
-  background-image: radial-gradient(var(--bg-dot) 2px, transparent 2px),
-    linear-gradient(165deg, #0d1f1a 0%, #091413 45%, #060f0e 100%);
-  background-size: 30px 30px, cover;
+  background: linear-gradient(165deg, #0d1f1a 0%, #091413 45%, #060f0e 100%);
   background-attachment: fixed;
   color: var(--text-light);
   line-height: 1.6;
@@ -85,7 +89,7 @@ nav {
   top: 0;
   left: 0;
   right: 0;
-  padding: 20px 50px;
+  padding: 16px 48px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -94,7 +98,7 @@ nav {
   transition: var(--transition-fast);
 }
 .navbar-hidden {
-  background: var(--bg-dot);
+  background: var(--surface);
   border-bottom-color: var(--white-30);
 }
 .navbar-show {
@@ -103,7 +107,7 @@ nav {
   left: 24px;
   right: 24px;
   border-radius: var(--radius-pill);
-  background: color-mix(in srgb, var(--bg-dot) 30%, transparent);
+  background: color-mix(in srgb, var(--surface) 30%, transparent);
   backdrop-filter: blur(30px);
   border-color: var(--white-30);
 }
@@ -114,14 +118,15 @@ nav .logo {
   font-weight: 900;
   color: var(--primary);
   letter-spacing: 2px;
+  white-space: nowrap;
 }
 .logo span {
   color: var(--text-light);
 }
 .menu-toggle {
   display: none;
-  background: var(--white-30);
-  padding: 6px 12px;
+  background: var(--surface);
+  padding: 8px 12px;
   border-radius: 50%;
   justify-content: center;
   align-items: center;
@@ -137,7 +142,7 @@ nav .logo {
 nav ul {
   list-style: none;
   display: flex;
-  gap: 30px;
+  gap: 32px;
 }
 nav ul .menu-close {
   display: flex;
@@ -150,7 +155,7 @@ nav ul .back-button {
   border: none;
   font-size: 24px;
   color: var(--text-light);
-  background: var(--bg-dot);
+  background: var(--surface);
   cursor: pointer;
 }
 nav ul li a {
@@ -166,7 +171,7 @@ nav ul li a:hover {
 
 /* SECTION UMUM */
 section {
-  padding: 100px var(--padding-x);
+  padding: 96px var(--padding-x);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -175,7 +180,7 @@ section {
 
 .section-title {
   font-size: 2.5rem;
-  margin-bottom: 50px;
+  margin-bottom: 48px;
   text-align: center;
   color: var(--primary);
 }
@@ -197,7 +202,7 @@ section {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  gap: 50px;
+  gap: 48px;
 }
 
 .hero-content {
@@ -222,14 +227,17 @@ section {
 .hero-content p {
   color: var(--text-muted);
   font-size: 1.1rem;
-  margin-bottom: 30px;
+  margin-bottom: 32px;
   max-width: var(--max-w-text);
   font-weight: 200;
 }
 
 .btn {
-  display: inline-block;
-  padding: 12px 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 12px 32px;
   background-color: var(--primary);
   color: var(--bg-dark);
   text-decoration: none;
@@ -271,26 +279,26 @@ section {
 .card {
   background: var(--card-bg);
   backdrop-filter: blur(var(--blur-card));
-  padding: 40px;
+  padding: 32px;
   border-radius: var(--border-radius);
   border: 1px solid var(--border-subtle);
 }
 
 .card h3 {
   color: var(--primary);
-  margin-bottom: 15px;
+  margin-bottom: 16px;
   font-size: var(--fs-lg);
 }
 
 .card p {
   color: var(--text-muted);
-  margin-bottom: 15px;
+  margin-bottom: 16px;
 }
 
 .skills-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 16px;
   margin-top: 20px;
 }
 
@@ -313,14 +321,14 @@ section {
 .timeline-item {
   background: var(--card-bg);
   backdrop-filter: blur(var(--blur-card));
-  padding: 30px;
+  padding: 32px;
   border-radius: var(--radius-sm);
   border-left: 5px solid var(--primary);
 }
 
-.timeline-item h4 {
+.timeline-item h3 {
   font-size: 1.3rem;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
 }
 
 .timeline-item span {
@@ -331,14 +339,14 @@ section {
 
 .timeline-item p {
   color: var(--text-muted);
-  margin-top: 10px;
+  margin-top: 12px;
   font-size: var(--fs-sm);
 }
 
 /* FOOTER */
 footer {
   text-align: center;
-  padding: 40px;
+  padding: 40px var(--padding-x);
   background: transparent;
   border-top: 1px solid var(--border-subtle);
   color: var(--text-muted);
@@ -362,15 +370,47 @@ footer a {
 .carousel-container {
   width: 100%;
   position: relative;
-  padding: 30px 0;
+  padding: 0 0 32px;
+}
+
+/* Tombol panah: di kanan atas area carousel, sejajar tepi kanan kartu. */
+.carousel-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 0 var(--padding-x);
+}
+
+.carousel-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--primary);
+  background: var(--surface);
+  border: 1px solid var(--white-30);
+  border-radius: 50%;
+  transition: var(--transition-fast);
+}
+
+.carousel-btn:hover:not(:disabled) {
+  border-color: var(--primary);
+  transform: scale(1.05);
+}
+
+.carousel-btn:disabled {
+  opacity: 0.35;
 }
 
 .carousel-track {
   display: flex;
-  gap: 30px;
+  gap: 32px;
   overflow-x: auto;
   scrollbar-width: none;
-  padding: 20px var(--padding-x);
+  padding: 16px var(--padding-x);
   cursor: grab;
 }
 
@@ -404,7 +444,7 @@ footer a {
   backdrop-filter: blur(var(--blur-card));
   border: 1px solid var(--border-subtle);
   border-radius: var(--border-radius);
-  padding: 30px;
+  padding: 32px;
   text-decoration: none;
   color: var(--text-light);
   transition:
@@ -426,7 +466,7 @@ footer a {
 .project-card h3 {
   color: var(--primary);
   font-size: var(--fs-lg);
-  margin-bottom: 15px;
+  margin-bottom: 16px;
 }
 
 .project-card p {
@@ -465,25 +505,55 @@ footer a {
   list-style: none;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px 24px;
-  max-width: 500px;
-  margin: 25px auto;
+  gap: 16px 24px;
+  max-width: 560px;
+  margin: 24px auto;
   padding: 0;
 }
 
 .contact-list li {
   display: flex;
   align-items: center;
-  gap: 12px;
   min-width: 0;
+}
+
+/* Baris kontak: ikon dan teks ada di dalam link yang sama, jadi seluruh baris
+   setinggi 44px bisa ditekan, bukan hanya teksnya. */
+.contact-link,
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  min-width: 0;
+  padding-right: 8px;
+  border-radius: var(--radius-pill);
+}
+
+.contact-link {
+  width: 100%;
+  color: var(--text-light);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.contact-link:hover {
+  color: var(--primary);
+  background: rgba(var(--primary-rgb), 0.06);
+}
+
+.contact-link span:last-child,
+.contact-row span:last-child {
+  overflow-wrap: anywhere;
+  text-align: left;
 }
 
 .contact-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   flex: none;
   border-radius: 50%;
   background: rgba(var(--primary-rgb), 0.1);
@@ -498,44 +568,128 @@ footer a {
   stroke: currentColor;
 }
 
-.contact-list a,
-.contact-list span:last-child {
-  color: var(--text-light);
-  text-decoration: none;
-  transition: color var(--transition);
-  overflow-wrap: anywhere;
-  text-align: left;
-}
-
-.contact-list a:hover {
-  color: var(--primary);
-}
-
 .contact-card .btn {
-  margin-top: 10px;
+  margin-top: 12px;
+}
+
+/* TABLET: 769px sampai 1024px. Navbar dan hero dikecilkan agar tidak berdesakan. */
+@media (min-width: 769px) and (max-width: 1024px) {
+  :root {
+    --padding-x: 7%;
+  }
+
+  html {
+    scroll-padding-top: 88px;
+  }
+
+  nav {
+    padding: 16px 24px;
+  }
+  nav .logo {
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+  }
+  nav ul {
+    gap: 20px;
+  }
+  nav ul li a {
+    display: inline-block;
+    padding: 9px 8px; /* tinggi link mencapai 44px untuk target sentuh */
+  }
+  .hero-content h1 {
+    font-size: 2.75rem;
+  }
+  .hero-greeting {
+    font-size: 1.5rem;
+  }
+  .hero-image img {
+    width: 200px;
+    height: 200px;
+  }
 }
 
 /* MOBILE */
 @media (max-width: 768px) {
+  :root {
+    --padding-x: 24px;
+    --padding-x: calc(
+      24px + max(env(safe-area-inset-left), env(safe-area-inset-right))
+    );
+  }
+
+  html {
+    scroll-padding-top: 80px;
+  }
+
+  /* Register mobile: section dan kartu memakai jarak yang lebih rapat. */
+  section {
+    padding: 72px var(--padding-x);
+    min-height: auto; /* di HP tinggi mengikuti isi, bukan satu layar penuh */
+  }
+  .section-title {
+    font-size: clamp(1.9rem, 8vw, 2.25rem);
+    margin-bottom: 32px;
+  }
+  .card,
+  .project-card,
+  .timeline-item {
+    padding: 24px;
+  }
+
   #hero {
     flex-direction: column-reverse;
+    gap: 32px;
     text-align: center;
-    padding-top: 150px;
+    padding-top: 104px;
   }
   .hero-content h1 {
-    font-size: 2.8rem;
+    font-size: clamp(2.2rem, 10vw, 2.8rem);
+    margin-bottom: 16px;
+  }
+  .hero-greeting {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+  }
+  .hero-content p {
+    font-size: 1rem;
+    margin-bottom: 24px;
   }
   .about-container {
     grid-template-columns: 1fr;
+    gap: 24px;
   }
   .contact-list {
     grid-template-columns: 1fr; /* di HP kembali 1 kolom agar email/teks panjang tidak kepotong */
+    gap: 8px;
+  }
+  .carousel-track {
+    gap: 16px;
+    padding: 12px var(--padding-x);
   }
   nav {
-    padding: 20px;
+    min-height: 64px;
+    padding: 10px calc(16px + env(safe-area-inset-right)) 10px
+      calc(16px + env(safe-area-inset-left));
+  }
+  .navbar-show {
+    top: 8px;
+    left: 12px;
+    right: 12px;
+  }
+  nav .logo {
+    font-size: 1.25rem;
+    letter-spacing: 1px;
   }
   .menu-toggle {
     display: flex;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    font-size: 1.4rem;
+    line-height: 1;
+  }
+  footer {
+    padding-bottom: calc(40px + env(safe-area-inset-bottom));
   }
 
   nav ul {
@@ -557,6 +711,7 @@ footer a {
     width: 1px; /* lebar awal sempit, .active yang membukanya */
     transform: translateX(100%) scale(0);
     opacity: 0;
+    visibility: hidden; /* menu tertutup keluar dari urutan fokus */
     transition: var(--transition);
   }
 
@@ -564,6 +719,7 @@ footer a {
     opacity: 1;
     width: fit-content;
     transform: translateX(0) scale(1);
+    visibility: visible;
   }
   nav ul li {
     width: 100%;
@@ -575,7 +731,7 @@ footer a {
   nav ul li a {
     padding: 12px 24px;
     border-radius: var(--radius-pill);
-    background: var(--bg-dot);
+    background: var(--surface);
     transition: var(--transition);
     width: 100%;
   }
