@@ -1,0 +1,6 @@
+# Locally installed agent skills
+.agents/skills/grill-me/
+.agents/skills/grilling/
+
+# Lockfile for the above local-only skills
+skills-lock.json
