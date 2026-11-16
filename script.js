@@ -34,38 +34,142 @@ function initNavbarScroll() {
 function initMobileMenu() {
   const navMenu = document.querySelector("nav ul");
   const menuToggle = document.querySelector(".menu-toggle");
-  const backButton = document.querySelector(".back-button");
-  if (!navMenu) return;
+  const backdrop = document.querySelector(".nav-backdrop");
+  if (!navMenu || !menuToggle) return;
 
-  // Fokus pindah ke dalam menu saat dibuka, dan kembali ke tombol menu saat ditutup
-  // lewat Escape atau tombol tutup. Klik link tidak mengembalikan fokus karena
-  // pengguna sedang menuju section tujuan.
-  const setMenu = (open, restoreFocus = false) => {
+  const desktop = window.matchMedia("(min-width: 769px)");
+  const pageRegions = document.querySelectorAll("main, footer");
+  let lastFocused = null;
+
+  // Hanya elemen yang benar-benar tampil ikut dalam urutan Tab di dalam menu.
+  const focusables = () =>
+    [menuToggle, ...navMenu.querySelectorAll("a[href], button")].filter(
+      (el) => !el.disabled && el.offsetParent !== null,
+    );
+
+  // Fokus pindah ke link pertama saat dibuka, dan kembali ke elemen asal saat
+  // ditutup lewat Escape atau klik di luar panel. Klik link tidak mengembalikan
+  // fokus karena pengguna sedang menuju section tujuan.
+  const setMenu = (open, restoreFocus = true) => {
     navMenu.classList.toggle("active", open);
-    menuToggle?.setAttribute("aria-expanded", String(open));
+    backdrop?.classList.toggle("active", open);
+    document.documentElement.classList.toggle("menu-open", open);
+    document.body.classList.toggle("menu-open", open);
+    menuToggle.setAttribute("aria-expanded", String(open));
+    menuToggle.setAttribute("aria-label", open ? "Tutup menu" : "Buka menu");
+
+    // Isi halaman di belakang overlay diabaikan pembaca layar dan Tab.
+    pageRegions.forEach((region) => {
+      region.inert = open;
+    });
 
     if (open) {
-      navMenu.querySelector("a[href], button")?.focus();
-    } else if (restoreFocus) {
-      menuToggle?.focus();
+      lastFocused = document.activeElement;
+      navMenu.querySelector("a")?.focus();
+    } else {
+      if (restoreFocus && lastFocused instanceof HTMLElement) {
+        lastFocused.focus();
+      } else if (navMenu.contains(document.activeElement)) {
+        document.activeElement.blur();
+      }
+      lastFocused = null;
     }
   };
 
-  menuToggle?.addEventListener("click", () => setMenu(true));
-  backButton?.addEventListener("click", () => setMenu(false, true));
+  const isMenuOpen = () => navMenu.classList.contains("active");
 
-  // Escape hanya ditangani saat menu terbuka, agar tidak menelan tombol Escape
-  // untuk kebutuhan lain di halaman.
+  // Hamburger berfungsi sebagai toggle: klik saat menu terbuka akan menutupnya.
+  menuToggle.addEventListener("click", () => setMenu(!isMenuOpen()));
+
+  // Klik di overlay menutup menu.
+  backdrop?.addEventListener("click", () => setMenu(false));
+
   document.addEventListener("keydown", (e) => {
-    if (e.key !== "Escape" || !navMenu.classList.contains("active")) return;
-    e.preventDefault();
-    setMenu(false, true);
+    if (!isMenuOpen()) return;
+
+    // Escape hanya ditangani saat menu terbuka, agar tidak menelan tombol Escape
+    // untuk kebutuhan lain di halaman.
+    if (e.key === "Escape") {
+      e.preventDefault();
+      setMenu(false);
+      return;
+    }
+
+    // Focus trap: Tab berputar di antara hamburger dan isi panel.
+    if (e.key !== "Tab") return;
+    const items = focusables();
+    if (!items.length) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    const current = document.activeElement;
+
+    if (!items.includes(current)) {
+      e.preventDefault();
+      first.focus();
+    } else if (e.shiftKey && current === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && current === last) {
+      e.preventDefault();
+      first.focus();
+    }
   });
 
   // Tutup menu setelah link diklik agar layar HP tidak tertutup.
   navMenu.querySelectorAll("li a").forEach((link) => {
-    link.addEventListener("click", () => setMenu(false));
+    link.addEventListener("click", () => setMenu(false, false));
   });
+
+  // Panel hanya ada di layar mobile; saat layar melebar menu ditutup agar
+  // scroll-lock dan inert tidak tertinggal.
+  desktop.addEventListener("change", (e) => {
+    if (e.matches && isMenuOpen()) setMenu(false, false);
+  });
+}
+
+function initScrollSpy() {
+  const links = Array.from(
+    document.querySelectorAll('nav ul li a[href^="#"]'),
+  );
+  const items = links
+    .map((link) => ({
+      link,
+      section: document.getElementById(link.getAttribute("href").slice(1)),
+    }))
+    .filter((item) => item.section);
+  if (!items.length) return;
+
+  let currentId = null;
+
+  const update = () => {
+    const line = window.scrollY + window.innerHeight * 0.35;
+    let active = items[0];
+
+    items.forEach((item) => {
+      const top = item.section.getBoundingClientRect().top + window.scrollY;
+      if (top <= line) active = item;
+    });
+
+    // Saat halaman mentok di bawah, section terakhir yang menang.
+    const atBottom =
+      window.innerHeight + window.scrollY >=
+      document.documentElement.scrollHeight - 2;
+    if (atBottom) active = items[items.length - 1];
+
+    if (active.section.id === currentId) return;
+    currentId = active.section.id;
+
+    items.forEach((item) => {
+      const isActive = item.section.id === currentId;
+      item.link.classList.toggle("is-active", isActive);
+      if (isActive) item.link.setAttribute("aria-current", "true");
+      else item.link.removeAttribute("aria-current");
+    });
+  };
+
+  window.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update);
+  update();
 }
 
 function initCarousel() {
@@ -147,5 +251,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initScrollReveal();
   initNavbarScroll();
   initMobileMenu();
+  initScrollSpy();
   initCarousel();
 });

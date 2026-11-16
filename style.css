@@ -26,7 +26,6 @@
   /* Spacing: satu skala kelipatan 4px untuk padding, margin, dan gap. */
   --max-w-text: 600px;
   --blur-card: 12px;
-  --hover-scale: 1.1;
 
   /* Transisi */
   --transition-fast: all 0.25s ease-in-out;
@@ -93,9 +92,33 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 1000;
+  z-index: 1100;
   border: 1px solid transparent;
   transition: var(--transition-fast);
+}
+
+/* Lapisan gelap di luar panel menu: klik di sini menutup menu. */
+.nav-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(3, 10, 8, 0.55);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.25s ease,
+    visibility 0s linear 0.25s;
+}
+.nav-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.25s ease;
+}
+
+/* Halaman di belakang menu tidak ikut ter-scroll saat menu terbuka. */
+html.menu-open,
+body.menu-open {
+  overflow: hidden;
 }
 .navbar-hidden {
   background: var(--surface);
@@ -132,31 +155,34 @@ nav .logo {
   align-items: center;
   border: 1px solid var(--white-30);
   color: var(--primary);
-  font-size: 2rem;
   cursor: pointer;
   transition: var(--transition-fast);
 }
-.menu-toggle:hover {
-  transform: scale(var(--hover-scale));
+
+/* Ikon tombol digambar sebagai SVG, bukan karakter font, agar tidak ada
+   garis ganda akibat glyph fallback saat tombol diperbesar. */
+.menu-toggle svg,
+.carousel-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+/* Hover tanpa transform: scale agar lapisan tombol tidak dirender ulang. */
+.menu-toggle:hover,
+.menu-toggle[aria-expanded="true"] {
+  background: rgba(var(--primary-rgb), 0.15);
+  border-color: var(--primary);
 }
 nav ul {
   list-style: none;
   display: flex;
   gap: 32px;
-}
-nav ul .menu-close {
-  display: flex;
-  justify-content: flex-end;
-  align-items: end;
-}
-nav ul .back-button {
-  display: none;
-  border-radius: 50%;
-  border: none;
-  font-size: 24px;
-  color: var(--text-light);
-  background: var(--surface);
-  cursor: pointer;
 }
 nav ul li a {
   color: var(--text-light);
@@ -167,6 +193,14 @@ nav ul li a {
 
 nav ul li a:hover {
   color: var(--primary);
+}
+
+/* Section yang sedang dibaca ditandai di menu, desktop maupun mobile. */
+nav ul li a.is-active {
+  color: var(--primary);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
 }
 
 /* SECTION UMUM */
@@ -387,8 +421,6 @@ footer a {
   justify-content: center;
   width: 44px;
   height: 44px;
-  font-size: 1.5rem;
-  line-height: 1;
   color: var(--primary);
   background: var(--surface);
   border: 1px solid var(--white-30);
@@ -398,7 +430,8 @@ footer a {
 
 .carousel-btn:hover:not(:disabled) {
   border-color: var(--primary);
-  transform: scale(1.05);
+  background: rgba(var(--primary-rgb), 0.15);
+  color: var(--text-light);
 }
 
 .carousel-btn:disabled {
@@ -685,77 +718,73 @@ footer a {
     width: 44px;
     height: 44px;
     padding: 0;
-    font-size: 1.4rem;
-    line-height: 1;
   }
   footer {
     padding-bottom: calc(40px + env(safe-area-inset-bottom));
   }
 
+  /* Panel menu: kartu di bawah navbar, meluncur masuk dari kanan. */
   nav ul {
     position: fixed;
-    right: 4px;
-    top: 4px;
-    gap: 12px;
+    top: 76px;
+    right: calc(12px + env(safe-area-inset-right));
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-end;
-    min-width: 50%;
-    background: var(--bg-dark);
-    padding: 16px;
-    border-radius: var(--border-radius);
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    align-items: stretch;
+    gap: 2px;
+    width: min(78vw, 288px);
+    max-height: calc(100dvh - 96px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 8px;
+    background: var(--surface);
     border: 1px solid var(--white-30);
-    height: fit-content;
-    width: 1px; /* lebar awal sempit, .active yang membukanya */
-    transform: translateX(100%) scale(0);
+    border-radius: var(--radius-sm);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+    transform: translateX(calc(100% + 24px));
     opacity: 0;
     visibility: hidden; /* menu tertutup keluar dari urutan fokus */
-    transition: var(--transition);
+    transition:
+      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.22s ease,
+      visibility 0s linear 0.3s;
+  }
+  nav ul.active {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+    transition:
+      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.22s ease,
+      visibility 0s;
   }
 
-  nav ul.active {
-    opacity: 1;
-    width: fit-content;
-    transform: translateX(0) scale(1);
-    visibility: visible;
-  }
   nav ul li {
     width: 100%;
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
   }
   nav ul li a {
-    padding: 12px 24px;
-    border-radius: var(--radius-pill);
-    background: var(--surface);
-    transition: var(--transition);
-    width: 100%;
-  }
-  nav ul li a:hover {
-    transform: scale(var(--hover-scale));
-    border-radius: var(--radius-sm);
-  }
-
-  nav ul .back-button {
     display: flex;
-    justify-content: center;
-    padding: 12px;
     align-items: center;
-    font-weight: lighter;
-    color: var(--primary);
-    border: 1px solid var(--white-30);
-    border-radius: var(--radius-pill);
+    min-height: 44px;
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    color: var(--text-light);
+    font-size: 1rem;
+    font-weight: 500;
     transition: var(--transition-fast);
-    width: 50px;
-    height: 50px;
   }
-  nav ul .back-button:hover {
-    border-radius: var(--radius-sm);
-    transform: scale(var(--hover-scale));
+  nav ul li a:hover,
+  nav ul li a:focus-visible {
+    background: rgba(var(--primary-rgb), 0.1);
+    color: var(--primary);
+  }
+  /* Penanda halaman aktif: warna + bobot huruf, tanpa garis tepi ganda. */
+  nav ul li a.is-active {
+    background: rgba(var(--primary-rgb), 0.14);
+    color: var(--primary);
+    font-weight: 700;
+    text-decoration: none;
   }
 }
 

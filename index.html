@@ -37,6 +37,8 @@
     />
   </head>
   <body>
+    <div class="nav-backdrop" aria-hidden="true"></div>
+
     <header>
       <nav id="navbar" class="navbar-hidden" aria-label="Navigasi utama">
         <div class="logo">Tegar <span> Izoelhaq </span></div>
@@ -48,19 +50,18 @@
           aria-expanded="false"
           aria-controls="nav-menu"
         >
-          ☰
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <line x1="4" y1="7" x2="20" y2="7" />
+            <line x1="4" y1="12" x2="20" y2="12" />
+            <line x1="4" y1="17" x2="20" y2="17" />
+          </svg>
         </button>
 
         <ul id="nav-menu">
-          <li class="menu-close">
-            <button type="button" class="back-button" aria-label="Tutup menu">
-              ✕
-            </button>
-          </li>
           <li><a href="#hero">Beranda</a></li>
           <li><a href="#about">Tentang</a></li>
           <li><a href="#experience">Pengalaman</a></li>
-          <li><a href="#projects">proyek</a></li>
+          <li><a href="#projects">Proyek</a></li>
           <li><a href="#contact">Kontak</a></li>
         </ul>
       </nav>
@@ -167,7 +168,9 @@
               data-carousel-prev
               aria-label="Proyek sebelumnya"
             >
-              ‹
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
             </button>
             <button
               type="button"
@@ -175,7 +178,9 @@
               data-carousel-next
               aria-label="Proyek berikutnya"
             >
-              ›
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
             </button>
           </div>
           <div class="carousel-track">
