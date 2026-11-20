@@ -1,0 +1,11 @@
+{
+  "name": "tegar-izo-portfolio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/"
+  },
+  "devDependencies": {
+    "jsdom": "^31.0.1"
+  }
+}

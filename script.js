@@ -31,6 +31,49 @@ function initNavbarScroll() {
   updateNavbar();
 }
 
+// Tema awal sudah dipasang skrip di <head>; di sini hanya menangani tombol,
+// penyimpanan pilihan, dan perubahan preferensi sistem selama belum memilih.
+function initThemeToggle() {
+  const root = document.documentElement;
+  const toggle = document.querySelector(".theme-toggle");
+  if (!toggle) return;
+
+  const systemLight = window.matchMedia("(prefers-color-scheme: light)");
+
+  const storedTheme = () => {
+    try {
+      const value = localStorage.getItem("theme");
+      return value === "light" || value === "dark" ? value : null;
+    } catch {
+      return null; // localStorage diblokir
+    }
+  };
+
+  const apply = (theme) => {
+    root.dataset.theme = theme;
+    toggle.setAttribute("aria-pressed", String(theme === "light"));
+  };
+
+  // Tombol hanya mengubah tema, pilihan disimpan agar bertahan antar kunjungan.
+  toggle.addEventListener("click", () => {
+    const next = root.dataset.theme === "light" ? "dark" : "light";
+    apply(next);
+    try {
+      localStorage.setItem("theme", next);
+    } catch {
+      // Penyimpanan diblokir: tema tetap berlaku untuk sesi ini.
+    }
+  });
+
+  // Ikuti OS selama pengguna belum pernah memilih tema sendiri.
+  systemLight.addEventListener("change", (event) => {
+    if (storedTheme()) return;
+    apply(event.matches ? "light" : "dark");
+  });
+
+  apply(root.dataset.theme === "light" ? "light" : "dark");
+}
+
 function initMobileMenu() {
   const navMenu = document.querySelector("nav ul");
   const menuToggle = document.querySelector(".menu-toggle");
@@ -56,7 +99,7 @@ function initMobileMenu() {
     document.documentElement.classList.toggle("menu-open", open);
     document.body.classList.toggle("menu-open", open);
     menuToggle.setAttribute("aria-expanded", String(open));
-    menuToggle.setAttribute("aria-label", open ? "Tutup menu" : "Buka menu");
+    menuToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
 
     // Isi halaman di belakang overlay diabaikan pembaca layar dan Tab.
     pageRegions.forEach((region) => {
@@ -172,85 +215,103 @@ function initScrollSpy() {
   update();
 }
 
-function initCarousel() {
-  const slider = document.querySelector(".carousel-track");
-  if (!slider) return;
+// Pratinjau sertifikat: satu dialog dipakai ulang untuk semua kartu. Data
+// dibaca dari kartu yang diklik supaya judul, thumbnail, dan tautan PDF tidak
+// perlu ditulis dua kali di markup.
+function initCertModal() {
+  const modal = document.getElementById("cert-modal");
+  const triggers = document.querySelectorAll("[data-cert-open]");
+  if (!modal || !triggers.length) return;
 
-  const prevButton = document.querySelector("[data-carousel-prev]");
-  const nextButton = document.querySelector("[data-carousel-next]");
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const panel = modal.querySelector(".cert-modal-panel");
+  const modalTitle = document.getElementById("cert-modal-title");
+  const modalMeta = modal.querySelector("[data-cert-meta]");
+  const modalImage = modal.querySelector("[data-cert-image]");
+  const modalLink = modal.querySelector("[data-cert-href]");
+  const closeButton = modal.querySelector(".cert-modal-close");
+  const background = document.querySelectorAll("main, footer, header");
+  let lastFocused = null;
 
-  // Satu langkah = satu kartu penuh ditambah jarak antar kartu.
-  const stepSize = () => {
-    const card = slider.querySelector(".project-card");
-    const gap = parseFloat(getComputedStyle(slider).columnGap) || 0;
-    return card ? card.offsetWidth + gap : slider.clientWidth * 0.8;
-  };
+  const isOpen = () => !modal.hidden;
 
-  const updateButtons = () => {
-    if (!prevButton || !nextButton) return;
-    const maxScroll = slider.scrollWidth - slider.clientWidth;
-    prevButton.disabled = slider.scrollLeft <= 1;
-    nextButton.disabled = slider.scrollLeft >= maxScroll - 1;
-  };
+  const open = (trigger) => {
+    const card = trigger.closest(".cert-card");
+    if (!card) return;
 
-  const scrollByCard = (direction) => {
-    slider.scrollBy({
-      left: direction * stepSize(),
-      behavior: reduceMotion.matches ? "auto" : "smooth",
+    const thumbnail = card.querySelector("img");
+    const pdfLink = card.querySelector(".cert-link");
+
+    lastFocused = trigger;
+    modalTitle.textContent = card.querySelector("h3").textContent.trim();
+    modalMeta.textContent = card.querySelector(".cert-meta").textContent.trim();
+    modalImage.src = thumbnail.getAttribute("src");
+    modalImage.alt = thumbnail.alt;
+    modalLink.href = pdfLink.href;
+
+    modal.hidden = false;
+    // Isi halaman di belakang dialog tidak ikut Tab maupun pembaca layar.
+    background.forEach((region) => {
+      region.inert = true;
     });
+    document.documentElement.classList.add("modal-open");
+    document.body.classList.add("modal-open");
+    closeButton.focus();
   };
 
-  prevButton?.addEventListener("click", () => scrollByCard(-1));
-  nextButton?.addEventListener("click", () => scrollByCard(1));
-  slider.addEventListener("scroll", updateButtons, { passive: true });
-  window.addEventListener("resize", updateButtons);
-  updateButtons();
+  const close = () => {
+    modal.hidden = true;
+    background.forEach((region) => {
+      region.inert = false;
+    });
+    document.documentElement.classList.remove("modal-open");
+    document.body.classList.remove("modal-open");
+    if (lastFocused instanceof HTMLElement) lastFocused.focus();
+    lastFocused = null;
+  };
 
-  let isDown = false;
-  let hasDragged = false;
-  let startX = 0;
-  let startScrollLeft = 0;
-
-  slider.addEventListener("mousedown", (e) => {
-    isDown = true;
-    hasDragged = false;
-    startX = e.pageX - slider.offsetLeft;
-    startScrollLeft = slider.scrollLeft;
+  triggers.forEach((trigger) => {
+    trigger.addEventListener("click", () => open(trigger));
   });
 
-  slider.addEventListener("mouseleave", () => {
-    isDown = false;
+  // Backdrop dan tombol tutup sama-sama memakai penanda data-cert-close.
+  modal.addEventListener("click", (event) => {
+    if (event.target.closest("[data-cert-close]")) close();
   });
 
-  window.addEventListener("mouseup", () => {
-    isDown = false;
-  });
+  document.addEventListener("keydown", (event) => {
+    if (!isOpen()) return;
 
-  slider.addEventListener("mousemove", (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - slider.offsetLeft;
-    const walk = (x - startX) * 1.5;
+    if (event.key === "Escape") {
+      event.preventDefault();
+      close();
+      return;
+    }
 
-    if (Math.abs(walk) > 5) hasDragged = true;
+    // Focus trap: Tab berputar di antara tombol tutup dan tautan PDF.
+    if (event.key !== "Tab") return;
+    const focusables = Array.from(
+      panel.querySelectorAll("a[href], button"),
+    ).filter((el) => !el.disabled);
+    if (!focusables.length) return;
 
-    slider.scrollLeft = startScrollLeft - walk;
-  });
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
 
-  // Batalkan klik yang terpicu setelah selesai drag.
-  slider.addEventListener("click", (e) => {
-    if (!hasDragged) return;
-    e.preventDefault();
-    e.stopPropagation();
-    hasDragged = false;
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
   });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   initScrollReveal();
   initNavbarScroll();
+  initThemeToggle();
   initMobileMenu();
   initScrollSpy();
-  initCarousel();
+  initCertModal();
 });

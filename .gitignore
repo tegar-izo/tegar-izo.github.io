@@ -1,3 +1,6 @@
+# Dependensi test
+node_modules/
+
 # Locally installed agent skills
 .agents/skills/grill-me/
 .agents/skills/grilling/

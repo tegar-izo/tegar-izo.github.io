@@ -1,15 +1,34 @@
 <!doctype html>
-<html lang="id">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Tema ditentukan sebelum render agar tidak ada kedip antar tema.
+      // Urutan prioritas: pilihan manual (localStorage), lalu preferensi sistem.
+      (() => {
+        let stored = null;
+        try {
+          stored = localStorage.getItem("theme");
+        } catch {
+          // localStorage bisa diblokir; cukup pakai preferensi sistem.
+        }
+        const systemLight = window.matchMedia("(prefers-color-scheme: light)");
+        document.documentElement.dataset.theme =
+          stored === "light" || stored === "dark"
+            ? stored
+            : systemLight.matches
+              ? "light"
+              : "dark";
+      })();
+    </script>
     <meta
       name="google-site-verification"
       content="UnyQnyO_bA7mLU5jqZ6EJuWq7Mk7JHj4fQLgJGJgLKU"
     />
     <meta
       name="description"
-      content="Portfolio resmi Tegar Izoelhaq, seorang web developer dan student yang berfokus pada teknologi, web development, dan AI."
+      content="The portfolio of Tegar Izoelhaq — web developer, computer engineering student, and AI enthusiast."
     />
     <meta
       name="keywords"
@@ -21,7 +40,7 @@
 
     <link rel="apple-touch-icon" href="favicon.png" />
 
-    <title>Tegar Izoelhaq | Portofolio Web Developer & AI enthusiast</title>
+    <title>Tegar Izoelhaq | Web Developer &amp; AI Enthusiast</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -40,50 +59,70 @@
     <div class="nav-backdrop" aria-hidden="true"></div>
 
     <header>
-      <nav id="navbar" class="navbar-hidden" aria-label="Navigasi utama">
+      <nav id="navbar" class="navbar-hidden" aria-label="Main navigation">
         <div class="logo">Tegar <span> Izoelhaq </span></div>
 
-        <button
-          type="button"
-          class="menu-toggle"
-          aria-label="Buka menu"
-          aria-expanded="false"
-          aria-controls="nav-menu"
-        >
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <line x1="4" y1="7" x2="20" y2="7" />
-            <line x1="4" y1="12" x2="20" y2="12" />
-            <line x1="4" y1="17" x2="20" y2="17" />
-          </svg>
-        </button>
+        <div class="nav-right">
+          <ul id="nav-menu">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#certificates">Certificates</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
 
-        <ul id="nav-menu">
-          <li><a href="#hero">Beranda</a></li>
-          <li><a href="#about">Tentang</a></li>
-          <li><a href="#experience">Pengalaman</a></li>
-          <li><a href="#projects">Proyek</a></li>
-          <li><a href="#contact">Kontak</a></li>
-        </ul>
+          <button
+            type="button"
+            class="theme-toggle"
+            aria-label="Toggle color theme"
+            aria-pressed="false"
+          >
+            <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path
+                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+              />
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          </button>
+
+          <button
+            type="button"
+            class="menu-toggle"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="nav-menu"
+          >
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <line x1="4" y1="7" x2="20" y2="7" />
+              <line x1="4" y1="12" x2="20" y2="12" />
+              <line x1="4" y1="17" x2="20" y2="17" />
+            </svg>
+          </button>
+        </div>
       </nav>
     </header>
 
     <main>
       <section id="hero">
         <div class="hero-content">
-          <p class="hero-greeting">Halo, Saya</p>
+          <p class="hero-greeting">Hello, I&rsquo;m</p>
           <h1>Tegar Izoelhaq</h1>
           <p>
-            <strong>Artificial Intelligence & Tech Enthusiast</strong><br />
-            Computer Engineering student with a passion for programming and AI.
-            Focused on bridging academic foundations with modern web development
-            to build efficient, scalable digital solutions.
+            <strong>Web Developer &amp; AI Enthusiast</strong><br />
+            Computer Engineering student with a passion for programming and AI,
+            combining academic foundations with modern web development to build
+            efficient, scalable digital solutions.
           </p>
-          <a href="#contact" class="btn">Hubungi Saya</a>
+          <a href="#contact" class="btn">Get in Touch</a>
         </div>
         <div class="hero-image">
           <img
             src="img/hero.webp"
-            alt="Foto Tegar Izoelhaq"
+            alt="Portrait of Tegar Izoelhaq"
             width="1024"
             height="1024"
             fetchpriority="high"
@@ -93,29 +132,30 @@
       </section>
 
       <section id="about">
-        <h2 class="section-title hidden">Tentang & Keahlian</h2>
+        <h2 class="section-title hidden">About &amp; Skills</h2>
         <div class="about-container">
           <div class="card hidden">
-            <h3>Profil Singkat</h3>
+            <h3>Profile</h3>
             <p>
-              Saya memiliki ketertarikan mendalam pada teknologi informasi dan
-              pemrograman web. Dengan dasar logika analitis yang kuat, saya
-              terbiasa belajar mandiri (otodidak) mengenai arsitektur web dan
-              pemrograman.
+              I&rsquo;m deeply interested in information technology and web
+              programming. With a strong foundation in analytical thinking,
+              I&rsquo;ve taught myself much of what I know about web architecture
+              and programming.
             </p>
             <p>
-              Saya juga aktif beradaptasi dan menggunakan alat bantu AI
-              (Generative AI) untuk mempercepat produktivitas dan pemecahan
-              masalah (troubleshooting).
+              I treat generative AI as a research and debugging aid, not a
+              substitute for understanding the code I ship. I build with plain
+              HTML, CSS, and JavaScript, and I like to know how things work
+              under the hood.
             </p>
           </div>
 
           <div class="card hidden">
-            <h3>Kompetensi Utama</h3>
+            <h3>Core Competencies</h3>
             <div class="skills-grid">
-              <span class="skill-tag">Web Programming (HTML, CSS, JS)</span>
-              <span class="skill-tag">Logika & Algoritma</span>
-              <span class="skill-tag">AI Adaptation & Prompt Engineering</span>
+              <span class="skill-tag">Web Development (HTML, CSS, JS)</span>
+              <span class="skill-tag">Logic &amp; Algorithms</span>
+              <span class="skill-tag">AI-Assisted Development</span>
               <span class="skill-tag">Computational Thinking</span>
               <span class="skill-tag">Problem Solving</span>
             </div>
@@ -124,141 +164,387 @@
       </section>
 
       <section id="experience">
-        <h2 class="section-title hidden">Pengalaman & Pencapaian</h2>
-        <div class="timeline">
-          <div class="timeline-item hidden">
-            <h3>Juara 3 Olimpiade Sains Nasional (OSN) Informatika</h3>
-            <span>Tingkat Kabupaten Tebo</span>
-            <p>
-              kemampuan analisis algoritma yang kuat, pemecahan masalah berbasis
-              komputer, serta ketelitian yang tinggi dalam kompetisi sains.
-            </p>
-          </div>
+        <h2 class="section-title hidden">Experience &amp; Achievements</h2>
+        <ol class="timeline">
+          <li class="timeline-item hidden">
+            <div class="timeline-content">
+              <h3 class="timeline-title">
+                3rd Place, National Science Olympiad (OSN) &mdash; Informatics
+              </h3>
+              <span class="timeline-org">Tebo Regency Level</span>
+              <p>
+                Demonstrated strong algorithmic analysis, computer-based problem
+                solving, and close attention to detail in a science competition.
+              </p>
+            </div>
+          </li>
 
-          <div class="timeline-item hidden">
-            <h3>Pengembangan Teknologi Mandiri</h3>
-            <span>Proyek Personal</span>
-            <p>
-              Mempelajari dan mempraktekkan pemrograman web dasar secara otodidak
-              serta memanfaatkan prompt engineering pada AI untuk menyusun
-              kerangka teknis dan arsitektur website.
-            </p>
-          </div>
+          <li class="timeline-item hidden">
+            <div class="timeline-content">
+              <h3 class="timeline-title">Self-Taught Web Development</h3>
+              <span class="timeline-org">Personal Projects</span>
+              <p>
+                Built a foundation in web development through independent study
+                and hands-on projects, using AI tools to draft technical outlines
+                and site architecture.
+              </p>
+            </div>
+          </li>
 
-          <div class="timeline-item hidden">
-            <h3>Wakil Ketua Rohis & Wakil Ketua Kelas</h3>
-            <span>SMAN 2 Tebo</span>
-            <p>
-              Berperan aktif dalam kepanitiaan dan komunikasi organisasi. Berhasil
-              memimpin kelas sebagai penanggung jawab tata letak memenangkan Juara
-              1 Lomba Kerapian & Estetika Tingkat Sekolah.
-            </p>
-          </div>
-        </div>
+          <li class="timeline-item hidden">
+            <div class="timeline-content">
+              <h3 class="timeline-title">
+                Vice Chair of Rohis &amp; Class Vice President
+              </h3>
+              <span class="timeline-org">SMAN 2 Tebo</span>
+              <p>
+                Served actively on student committees and handled organizational
+                communication. As class layout coordinator, led the class to 1st
+                Place in the school&rsquo;s Tidiness &amp; Aesthetics Competition.
+              </p>
+            </div>
+          </li>
+        </ol>
       </section>
 
       <section id="projects">
-        <h2 class="section-title hidden">Proyek Saya</h2>
+        <h2 class="section-title hidden">My Projects</h2>
 
-        <div class="carousel-container hidden">
-          <div class="carousel-controls">
-            <button
-              type="button"
-              class="carousel-btn"
-              data-carousel-prev
-              aria-label="Proyek sebelumnya"
-            >
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <polyline points="15 18 9 12 15 6" />
-              </svg>
-            </button>
-            <button
-              type="button"
-              class="carousel-btn"
-              data-carousel-next
-              aria-label="Proyek berikutnya"
-            >
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <polyline points="9 18 15 12 9 6" />
-              </svg>
-            </button>
-          </div>
-          <div class="carousel-track">
-            <a
-              href="https://jadwal-shalat-gold.vercel.app"
-              target="_blank"
-              rel="noopener"
-              class="project-card"
-            >
+        <div class="project-list">
+          <article class="project-feature hidden">
+            <div class="project-preview" aria-hidden="true">
+              <div class="preview-chrome">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="preview-canvas">
+                <span class="preview-mark">JS</span>
+                <span class="preview-caption">Jadwal Shalat</span>
+              </div>
+            </div>
+
+            <div class="project-info">
+              <p class="project-kicker">Project 01</p>
               <h3>Jadwal Shalat</h3>
-              <p>
-                Aplikasi jadwal shalat berbasis web yang modern, ringan, dan
-                responsif. Dibangun dengan estetika Material Design 3.
+              <p class="project-desc">
+                A modern, lightweight, and responsive web app for prayer
+                schedules, built with Material Design 3 aesthetics.
               </p>
-              <span class="github-link">
-                Lihat Aplikasi <span aria-hidden="true">➔</span>
-              </span>
-            </a>
+              <ul class="tech-list" aria-label="Technologies and approach">
+                <li>Web App</li>
+                <li>Material Design 3</li>
+                <li>Responsive</li>
+              </ul>
+              <ul class="project-highlights">
+                <li>Prayer schedule in the browser</li>
+                <li>Material Design 3 interface</li>
+                <li>Lightweight, responsive layout</li>
+              </ul>
+              <div class="project-actions">
+                <a
+                  class="project-link project-link--primary"
+                  href="https://jadwal-shalat-gold.vercel.app"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Live Demo <span aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </article>
 
-            <a
-              href="https://tegar-izo.github.io/uangku"
-              target="_blank"
-              rel="noopener"
-              class="project-card"
-            >
+          <article class="project-feature hidden">
+            <div class="project-preview" aria-hidden="true">
+              <div class="preview-chrome">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="preview-canvas">
+                <span class="preview-mark">UK</span>
+                <span class="preview-caption">UangKu</span>
+              </div>
+            </div>
+
+            <div class="project-info">
+              <p class="project-kicker">Project 02</p>
               <h3>UangKu</h3>
-              <p>
-                Aplikasi manajemen keuangan personal yang sederhana, cepat, dan
-                elegant berbasis web. Uangku membantu melacak pemasukan dan
-                pengeluaran dengan antarmuka yang intuitif dan responsif.
+              <p class="project-desc">
+                A simple, fast, and elegant web app for personal finance.
+                UangKu helps you track income and expenses with an intuitive,
+                responsive interface.
               </p>
-              <span class="github-link">
-                Lihat Aplikasi <span aria-hidden="true">➔</span>
-              </span>
-            </a>
+              <ul class="tech-list" aria-label="Technologies and approach">
+                <li>Web App</li>
+                <li>Responsive</li>
+              </ul>
+              <ul class="project-highlights">
+                <li>Income and expense tracking</li>
+                <li>Clear, intuitive interface</li>
+                <li>Simple and fast</li>
+              </ul>
+              <div class="project-actions">
+                <a
+                  class="project-link project-link--primary"
+                  href="https://tegar-izo.github.io/uangku"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Live Demo <span aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </article>
 
-            <a
-              href="https://tegar-izo.github.io/Tchat"
-              target="_blank"
-              rel="noopener"
-              class="project-card"
-            >
+          <article class="project-feature hidden">
+            <div class="project-preview" aria-hidden="true">
+              <div class="preview-chrome">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="preview-canvas">
+                <span class="preview-mark">TC</span>
+                <span class="preview-caption">Tchat</span>
+              </div>
+            </div>
+
+            <div class="project-info">
+              <p class="project-kicker">Project 03</p>
               <h3>Tchat</h3>
-              <p>
-                Aplikasi obrolan dengan tampilan modern, responsif, dan real-time
-                yang terinspirasi oleh Telegram, dibangun dengan prinsip desain
-                Material Expressive. Dibangun menggunakan AI tool Gemini-cli
+              <p class="project-desc">
+                A modern, responsive, real-time chat app inspired by Telegram
+                and built on Material Expressive design principles.
               </p>
-              <span class="github-link">
-                Lihat Aplikasi <span aria-hidden="true">➔</span>
-              </span>
-            </a>
+              <ul class="tech-list" aria-label="Technologies and approach">
+                <li>Web App</li>
+                <li>Material Expressive</li>
+                <li>Gemini CLI</li>
+              </ul>
+              <ul class="project-highlights">
+                <li>Real-time messaging</li>
+                <li>Telegram-inspired look and feel</li>
+                <li>Material Expressive design</li>
+              </ul>
+              <div class="project-actions">
+                <a
+                  class="project-link project-link--primary"
+                  href="https://tegar-izo.github.io/Tchat"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Live Demo <span aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </article>
 
-            <a
-              href="https://tegar-izo.github.io/ChaNote/"
-              target="_blank"
-              rel="noopener"
-              class="project-card"
-            >
+          <article class="project-feature hidden">
+            <div class="project-preview" aria-hidden="true">
+              <div class="preview-chrome">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="preview-canvas">
+                <span class="preview-mark">CN</span>
+                <span class="preview-caption">ChaNote</span>
+              </div>
+            </div>
+
+            <div class="project-info">
+              <p class="project-kicker">Project 04</p>
               <h3>ChaNote</h3>
-              <p>
-                Aplikasi jurnaling harian untuk menumbuhkan kebiasaan menulis,
-                lengkap dengan mood, arsip, dan komentar. SPA berbasis Vanilla JS
-                dengan localStorage dan desain Material Design 3. Dibangun dengan
-                Generative AI.
+              <p class="project-desc">
+                A daily journaling app for building a writing habit, with moods,
+                an archive, and comments. Built as a Vanilla JS SPA using
+                localStorage and Material Design 3.
               </p>
-              <span class="github-link">
-                Lihat Aplikasi <span aria-hidden="true">➔</span>
+              <ul class="tech-list" aria-label="Technologies and approach">
+                <li>SPA</li>
+                <li>Vanilla JS</li>
+                <li>localStorage</li>
+                <li>Material Design 3</li>
+                <li>Generative AI</li>
+              </ul>
+              <ul class="project-highlights">
+                <li>Mood tracking for daily entries</li>
+                <li>Archive and comments</li>
+                <li>Saved locally in the browser</li>
+              </ul>
+              <div class="project-actions">
+                <a
+                  class="project-link project-link--primary"
+                  href="https://tegar-izo.github.io/ChaNote/"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Live Demo <span aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="certificates">
+        <h2 class="section-title hidden">Certificates</h2>
+
+        <div class="cert-grid">
+          <article class="cert-card hidden">
+            <button
+              type="button"
+              class="cert-preview"
+              data-cert-open
+              aria-label="Preview certificate: Public Lecture &ldquo;AI-Powered UI/UX&rdquo;"
+            >
+              <img
+                src="img/certificate/thumbs/ai-ux.jpg"
+                alt="AI-Powered UI/UX public lecture certificate from HIMATEK ITEBA"
+                width="900"
+                height="636"
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="cert-preview-hint" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="11" cy="11" r="7" />
+                  <line x1="16" y1="16" x2="21" y2="21" />
+                  <line x1="8" y1="11" x2="14" y2="11" />
+                  <line x1="11" y1="8" x2="11" y2="14" />
+                </svg>
               </span>
-            </a>
-          </div>
+            </button>
+            <div class="cert-body">
+              <h3>Public Lecture &ldquo;AI-Powered UI/UX&rdquo;</h3>
+              <p class="cert-meta">HIMATEK ITEBA &middot; November 2, 2026</p>
+              <a
+                class="cert-link"
+                href="img/certificate/Tegar%20Izoelhaq%20(1).pdf"
+                target="_blank"
+                rel="noopener"
+              >
+                Open Certificate <span aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="cert-card hidden">
+            <button
+              type="button"
+              class="cert-preview"
+              data-cert-open
+              aria-label="Preview certificate: Public Lecture on Investment Opportunities in the Capital Market"
+            >
+              <img
+                src="img/certificate/thumbs/pasar-modal.jpg"
+                alt="Public lecture certificate on investment opportunities and strategies for building financial futures, from ITEBA"
+                width="900"
+                height="637"
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="cert-preview-hint" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="11" cy="11" r="7" />
+                  <line x1="16" y1="16" x2="21" y2="21" />
+                  <line x1="8" y1="11" x2="14" y2="11" />
+                  <line x1="11" y1="8" x2="11" y2="14" />
+                </svg>
+              </span>
+            </button>
+            <div class="cert-body">
+              <h3>Public Lecture: Investment Opportunities in the Capital Market</h3>
+              <p class="cert-meta">Institut Teknologi Batam &middot; October 27, 2026</p>
+              <a
+                class="cert-link"
+                href="img/certificate/setifikat%20kuliah%20umum%20peluang%20investasi.pdf"
+                target="_blank"
+                rel="noopener"
+              >
+                Open Certificate <span aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="cert-card hidden">
+            <button
+              type="button"
+              class="cert-preview"
+              data-cert-open
+              aria-label="Preview certificate: Webinar Basic Web Hacking"
+            >
+              <img
+                src="img/certificate/thumbs/web-hacking.jpg"
+                alt="Webinar certificate: Basic Web Hacking, From IDOR to Account Takeover, from BLUG"
+                width="900"
+                height="637"
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="cert-preview-hint" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="11" cy="11" r="7" />
+                  <line x1="16" y1="16" x2="21" y2="21" />
+                  <line x1="8" y1="11" x2="14" y2="11" />
+                  <line x1="11" y1="8" x2="11" y2="14" />
+                </svg>
+              </span>
+            </button>
+            <div class="cert-body">
+              <h3>Webinar Basic Web Hacking: From IDOR to Account Takeover</h3>
+              <p class="cert-meta">
+                Cyber Division BLUG, Politeknik Negeri Batam &middot; October 24,
+                2026
+              </p>
+              <a
+                class="cert-link"
+                href="img/certificate/Tegar%20Izoelhaq.pdf"
+                target="_blank"
+                rel="noopener"
+              >
+                Open Certificate <span aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="cert-card hidden">
+            <button
+              type="button"
+              class="cert-preview"
+              data-cert-open
+              aria-label="Preview certificate: Automation Webinar UiPath x IOH"
+            >
+              <img
+                src="img/certificate/thumbs/uipath.jpg"
+                alt="Automation Webinar certificate: UiPath x IOH, from ONE Indonesia"
+                width="900"
+                height="637"
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="cert-preview-hint" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="11" cy="11" r="7" />
+                  <line x1="16" y1="16" x2="21" y2="21" />
+                  <line x1="8" y1="11" x2="14" y2="11" />
+                  <line x1="11" y1="8" x2="11" y2="14" />
+                </svg>
+              </span>
+            </button>
+            <div class="cert-body">
+              <h3>Automation Webinar: UiPath x IOH</h3>
+              <p class="cert-meta">ONE Indonesia &middot; October 1, 2026</p>
+              <a
+                class="cert-link"
+                href="img/certificate/Automation%20Webinar_%20UiPath%20x%20IOH%20held%20on%20October%201.%202026.pdf"
+                target="_blank"
+                rel="noopener"
+              >
+                Open Certificate <span aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+          </article>
         </div>
       </section>
 
       <section id="contact">
-        <h2 class="section-title hidden">Mari Berkolaborasi</h2>
+        <h2 class="section-title hidden">Let&rsquo;s Collaborate</h2>
         <div class="card contact-card hidden">
-          <h3>Hubungi Saya</h3>
+          <h3>Get in Touch</h3>
           <ul class="contact-list">
             <li>
               <a
@@ -380,18 +666,56 @@
                     <circle cx="12" cy="10" r="3" />
                   </svg>
                 </span>
-                <span>Tiban, Batam, Kepulauan Riau</span>
+                <span>Tiban, Batam, Riau Islands</span>
               </div>
             </li>
           </ul>
-          <a href="mailto:mastegar618@gmail.com" class="btn">Kirim Email</a>
+          <a href="mailto:mastegar618@gmail.com" class="btn">Send an Email</a>
         </div>
       </section>
     </main>
 
     <footer>
-      <p>&copy; 2026 Tegar Izoelhaq. Dibuat dengan Native HTML, CSS, & JS.</p>
+      <p>&copy; 2026 Tegar Izoelhaq. Built with vanilla HTML, CSS, and JavaScript.</p>
     </footer>
+
+    <div
+      class="cert-modal"
+      id="cert-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="cert-modal-title"
+      hidden
+    >
+      <div class="cert-modal-backdrop" data-cert-close></div>
+      <div class="cert-modal-panel">
+        <div class="cert-modal-head">
+          <div class="cert-modal-heading">
+            <h2 id="cert-modal-title">Certificate Preview</h2>
+            <p class="cert-modal-meta" data-cert-meta></p>
+          </div>
+          <button
+            type="button"
+            class="cert-modal-close"
+            data-cert-close
+            aria-label="Close preview"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <line x1="6" y1="6" x2="18" y2="18" />
+              <line x1="18" y1="6" x2="6" y2="18" />
+            </svg>
+          </button>
+        </div>
+        <div class="cert-modal-view">
+          <img data-cert-image alt="" decoding="async" />
+        </div>
+        <div class="cert-modal-foot">
+          <a class="btn" data-cert-href href="#" target="_blank" rel="noopener">
+            Open PDF <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </div>
     <script src="script.js"></script>
     <script type="application/ld+json">
       {
