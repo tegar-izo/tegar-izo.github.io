@@ -82,13 +82,21 @@ function initMobileMenu() {
 
   const desktop = window.matchMedia("(min-width: 769px)");
   const pageRegions = document.querySelectorAll("main, footer");
+  const langLinks = document.querySelectorAll(".lang-switch a[href]");
   let lastFocused = null;
 
+  // Label tombol mengikuti bahasa halaman; markup yang menyediakannya.
+  const labelOpen = menuToggle.dataset.labelOpen || "Open menu";
+  const labelClose = menuToggle.dataset.labelClose || "Close menu";
+
   // Hanya elemen yang benar-benar tampil ikut dalam urutan Tab di dalam menu.
+  // Pemilih bahasa ada di luar panel, jadi ikut dimasukkan agar tetap terjangkau.
   const focusables = () =>
-    [menuToggle, ...navMenu.querySelectorAll("a[href], button")].filter(
-      (el) => !el.disabled && el.offsetParent !== null,
-    );
+    [
+      menuToggle,
+      ...langLinks,
+      ...navMenu.querySelectorAll("a[href], button"),
+    ].filter((el) => !el.disabled && el.offsetParent !== null);
 
   // Fokus pindah ke link pertama saat dibuka, dan kembali ke elemen asal saat
   // ditutup lewat Escape atau klik di luar panel. Klik link tidak mengembalikan
@@ -99,7 +107,7 @@ function initMobileMenu() {
     document.documentElement.classList.toggle("menu-open", open);
     document.body.classList.toggle("menu-open", open);
     menuToggle.setAttribute("aria-expanded", String(open));
-    menuToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    menuToggle.setAttribute("aria-label", open ? labelClose : labelOpen);
 
     // Isi halaman di belakang overlay diabaikan pembaca layar dan Tab.
     pageRegions.forEach((region) => {

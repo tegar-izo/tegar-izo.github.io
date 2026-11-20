@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -28,7 +28,7 @@
     />
     <meta
       name="description"
-      content="The portfolio of Tegar Izoelhaq — web developer, computer engineering student, and AI enthusiast."
+      content="Portofolio Tegar Izoelhaq — pengembang web, mahasiswa teknik komputer, dan AI enthusiast."
     />
     <meta
       name="keywords"
@@ -40,18 +40,63 @@
 
     <link rel="apple-touch-icon" href="favicon.png" />
 
-    <title>Tegar Izoelhaq | Web Developer &amp; AI Enthusiast</title>
+    <title>Tegar Izoelhaq | Pengembang Web &amp; AI Enthusiast</title>
+
+    <!-- Bahasa aktif ditentukan URL; kedua versi saling menunjuk. -->
+    <link rel="canonical" href="https://tegar-izo.github.io/" />
+    <link rel="alternate" hreflang="id" href="https://tegar-izo.github.io/" />
+    <link rel="alternate" hreflang="en" href="https://tegar-izo.github.io/en/" />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://tegar-izo.github.io/"
+    />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Tegar Izoelhaq" />
+    <meta property="og:url" content="https://tegar-izo.github.io/" />
+    <meta
+      property="og:title"
+      content="Tegar Izoelhaq | Pengembang Web &amp; AI Enthusiast"
+    />
+    <meta
+      property="og:description"
+      content="Portofolio Tegar Izoelhaq — pengembang web, mahasiswa teknik komputer, dan AI enthusiast."
+    />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta
+      property="og:image"
+      content="https://tegar-izo.github.io/assets/images/hero.webp"
+    />
+    <meta property="og:image:alt" content="Foto Tegar Izoelhaq" />
+    <meta property="og:image:width" content="1024" />
+    <meta property="og:image:height" content="1024" />
+    <meta name="twitter:card" content="summary" />
+    <meta
+      name="twitter:title"
+      content="Tegar Izoelhaq | Pengembang Web &amp; AI Enthusiast"
+    />
+    <meta
+      name="twitter:description"
+      content="Portofolio Tegar Izoelhaq — pengembang web, mahasiswa teknik komputer, dan AI enthusiast."
+    />
+    <meta
+      name="twitter:image"
+      content="https://tegar-izo.github.io/assets/images/hero.webp"
+    />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Sora:wght@100..800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
     <link
       rel="preload"
       as="image"
-      href="img/hero.webp"
+      href="assets/images/hero.webp"
       fetchpriority="high"
     />
   </head>
@@ -59,23 +104,29 @@
     <div class="nav-backdrop" aria-hidden="true"></div>
 
     <header>
-      <nav id="navbar" class="navbar-hidden" aria-label="Main navigation">
+      <nav id="navbar" class="navbar-hidden" aria-label="Navigasi utama">
         <div class="logo">Tegar <span> Izoelhaq </span></div>
 
         <div class="nav-right">
           <ul id="nav-menu">
-            <li><a href="#hero">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#certificates">Certificates</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#hero">Beranda</a></li>
+            <li><a href="#about">Tentang</a></li>
+            <li><a href="#experience">Pengalaman</a></li>
+            <li><a href="#projects">Proyek</a></li>
+            <li><a href="#certificates">Sertifikat</a></li>
+            <li><a href="#contact">Kontak</a></li>
           </ul>
+
+          <div class="lang-switch" role="group" aria-label="Pilih bahasa">
+            <a href="/" hreflang="id" lang="id" aria-current="page">ID</a>
+            <span class="lang-sep" aria-hidden="true">|</span>
+            <a href="/en/" hreflang="en" lang="en">EN</a>
+          </div>
 
           <button
             type="button"
             class="theme-toggle"
-            aria-label="Toggle color theme"
+            aria-label="Ubah tema warna"
             aria-pressed="false"
           >
             <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -92,9 +143,11 @@
           <button
             type="button"
             class="menu-toggle"
-            aria-label="Open menu"
+            aria-label="Buka menu"
             aria-expanded="false"
             aria-controls="nav-menu"
+            data-label-open="Buka menu"
+            data-label-close="Tutup menu"
           >
             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <line x1="4" y1="7" x2="20" y2="7" />
@@ -109,20 +162,20 @@
     <main>
       <section id="hero">
         <div class="hero-content">
-          <p class="hero-greeting">Hello, I&rsquo;m</p>
+          <p class="hero-greeting">Halo, saya</p>
           <h1>Tegar Izoelhaq</h1>
           <p>
-            <strong>Web Developer &amp; AI Enthusiast</strong><br />
-            Computer Engineering student with a passion for programming and AI,
-            combining academic foundations with modern web development to build
-            efficient, scalable digital solutions.
+            <strong>Pengembang Web &amp; AI Enthusiast</strong><br />
+            Mahasiswa Teknik Komputer yang bersemangat pada pemrograman dan AI,
+            memadukan dasar akademik dengan pengembangan web modern untuk
+            membangun solusi digital yang efisien dan skalabel.
           </p>
-          <a href="#contact" class="btn">Get in Touch</a>
+          <a href="#contact" class="btn">Hubungi Saya</a>
         </div>
         <div class="hero-image">
           <img
-            src="img/hero.webp"
-            alt="Portrait of Tegar Izoelhaq"
+            src="assets/images/hero.webp"
+            alt="Foto Tegar Izoelhaq"
             width="1024"
             height="1024"
             fetchpriority="high"
@@ -132,61 +185,61 @@
       </section>
 
       <section id="about">
-        <h2 class="section-title hidden">About &amp; Skills</h2>
+        <h2 class="section-title hidden">Tentang &amp; Keahlian</h2>
         <div class="about-container">
           <div class="card hidden">
-            <h3>Profile</h3>
+            <h3>Profil</h3>
             <p>
-              I&rsquo;m deeply interested in information technology and web
-              programming. With a strong foundation in analytical thinking,
-              I&rsquo;ve taught myself much of what I know about web architecture
-              and programming.
+              Saya sangat tertarik pada teknologi informasi dan pemrograman web.
+              Dengan dasar berpikir analitis yang kuat, saya mempelajari sendiri
+              sebagian besar pengetahuan saya tentang arsitektur web dan
+              pemrograman.
             </p>
             <p>
-              I treat generative AI as a research and debugging aid, not a
-              substitute for understanding the code I ship. I build with plain
-              HTML, CSS, and JavaScript, and I like to know how things work
-              under the hood.
+              Saya memandang AI generatif sebagai alat bantu riset dan debugging,
+              bukan pengganti pemahaman atas kode yang saya tulis. Saya membangun
+              dengan HTML, CSS, dan JavaScript murni, dan saya ingin tahu
+              bagaimana sesuatu bekerja di balik layar.
             </p>
           </div>
 
           <div class="card hidden">
-            <h3>Core Competencies</h3>
+            <h3>Kompetensi Inti</h3>
             <div class="skills-grid">
-              <span class="skill-tag">Web Development (HTML, CSS, JS)</span>
-              <span class="skill-tag">Logic &amp; Algorithms</span>
-              <span class="skill-tag">AI-Assisted Development</span>
-              <span class="skill-tag">Computational Thinking</span>
-              <span class="skill-tag">Problem Solving</span>
+              <span class="skill-tag">Pengembangan Web (HTML, CSS, JS)</span>
+              <span class="skill-tag">Logika &amp; Algoritma</span>
+              <span class="skill-tag">Pengembangan Berbantuan AI</span>
+              <span class="skill-tag">Berpikir Komputasional</span>
+              <span class="skill-tag">Pemecahan Masalah</span>
             </div>
           </div>
         </div>
       </section>
 
       <section id="experience">
-        <h2 class="section-title hidden">Experience &amp; Achievements</h2>
+        <h2 class="section-title hidden">Pengalaman &amp; Pencapaian</h2>
         <ol class="timeline">
           <li class="timeline-item hidden">
             <div class="timeline-content">
               <h3 class="timeline-title">
-                3rd Place, National Science Olympiad (OSN) &mdash; Informatics
+                Juara 3, Olimpiade Sains Nasional (OSN) &mdash; Informatika
               </h3>
-              <span class="timeline-org">Tebo Regency Level</span>
+              <span class="timeline-org">Tingkat Kabupaten Tebo</span>
               <p>
-                Demonstrated strong algorithmic analysis, computer-based problem
-                solving, and close attention to detail in a science competition.
+                Menunjukkan kemampuan analisis algoritma, pemecahan masalah
+                berbasis komputer, dan ketelitian tinggi dalam kompetisi sains.
               </p>
             </div>
           </li>
 
           <li class="timeline-item hidden">
             <div class="timeline-content">
-              <h3 class="timeline-title">Self-Taught Web Development</h3>
-              <span class="timeline-org">Personal Projects</span>
+              <h3 class="timeline-title">Pengembang Web Otodidak</h3>
+              <span class="timeline-org">Proyek Pribadi</span>
               <p>
-                Built a foundation in web development through independent study
-                and hands-on projects, using AI tools to draft technical outlines
-                and site architecture.
+                Membangun fondasi pengembangan web melalui belajar mandiri dan
+                proyek langsung, menggunakan alat AI untuk menyusun kerangka
+                teknis dan arsitektur situs.
               </p>
             </div>
           </li>
@@ -194,13 +247,13 @@
           <li class="timeline-item hidden">
             <div class="timeline-content">
               <h3 class="timeline-title">
-                Vice Chair of Rohis &amp; Class Vice President
+                Wakil Ketua Rohis &amp; Wakil Ketua Kelas
               </h3>
               <span class="timeline-org">SMAN 2 Tebo</span>
               <p>
-                Served actively on student committees and handled organizational
-                communication. As class layout coordinator, led the class to 1st
-                Place in the school&rsquo;s Tidiness &amp; Aesthetics Competition.
+                Aktif dalam kepanitiaan siswa dan menangani komunikasi
+                organisasi. Sebagai koordinator tata letak kelas, memimpin kelas
+                meraih Juara 1 dalam Lomba Kebersihan dan Keindahan Kelas.
               </p>
             </div>
           </li>
@@ -208,7 +261,7 @@
       </section>
 
       <section id="projects">
-        <h2 class="section-title hidden">My Projects</h2>
+        <h2 class="section-title hidden">Proyek Saya</h2>
 
         <div class="project-list">
           <article class="project-feature hidden">
@@ -223,21 +276,21 @@
             </div>
 
             <div class="project-info">
-              <p class="project-kicker">Project 01</p>
+              <p class="project-kicker">Proyek 01</p>
               <h3>Jadwal Shalat</h3>
               <p class="project-desc">
-                A modern, lightweight, and responsive web app for prayer
-                schedules, built with Material Design 3 aesthetics.
+                Aplikasi web jadwal shalat yang modern, ringan, dan responsif,
+                dibangun dengan estetika Material Design 3.
               </p>
-              <ul class="tech-list" aria-label="Technologies and approach">
+              <ul class="tech-list" aria-label="Teknologi dan pendekatan">
                 <li>Web App</li>
                 <li>Material Design 3</li>
-                <li>Responsive</li>
+                <li>Responsif</li>
               </ul>
               <ul class="project-highlights">
-                <li>Prayer schedule in the browser</li>
-                <li>Material Design 3 interface</li>
-                <li>Lightweight, responsive layout</li>
+                <li>Jadwal shalat langsung di browser</li>
+                <li>Antarmuka Material Design 3</li>
+                <li>Tata letak ringan dan responsif</li>
               </ul>
               <div class="project-actions">
                 <a
@@ -246,7 +299,7 @@
                   target="_blank"
                   rel="noopener"
                 >
-                  Live Demo <span aria-hidden="true">&rarr;</span>
+                  Demo Langsung <span aria-hidden="true">&rarr;</span>
                 </a>
               </div>
             </div>
@@ -264,21 +317,21 @@
             </div>
 
             <div class="project-info">
-              <p class="project-kicker">Project 02</p>
+              <p class="project-kicker">Proyek 02</p>
               <h3>UangKu</h3>
               <p class="project-desc">
-                A simple, fast, and elegant web app for personal finance.
-                UangKu helps you track income and expenses with an intuitive,
-                responsive interface.
+                Aplikasi web keuangan pribadi yang sederhana, cepat, dan elegan.
+                UangKu membantu Anda mencatat pemasukan dan pengeluaran lewat
+                antarmuka yang intuitif dan responsif.
               </p>
-              <ul class="tech-list" aria-label="Technologies and approach">
+              <ul class="tech-list" aria-label="Teknologi dan pendekatan">
                 <li>Web App</li>
-                <li>Responsive</li>
+                <li>Responsif</li>
               </ul>
               <ul class="project-highlights">
-                <li>Income and expense tracking</li>
-                <li>Clear, intuitive interface</li>
-                <li>Simple and fast</li>
+                <li>Pencatatan pemasukan dan pengeluaran</li>
+                <li>Antarmuka jelas dan intuitif</li>
+                <li>Sederhana dan cepat</li>
               </ul>
               <div class="project-actions">
                 <a
@@ -287,7 +340,7 @@
                   target="_blank"
                   rel="noopener"
                 >
-                  Live Demo <span aria-hidden="true">&rarr;</span>
+                  Demo Langsung <span aria-hidden="true">&rarr;</span>
                 </a>
               </div>
             </div>
@@ -305,21 +358,21 @@
             </div>
 
             <div class="project-info">
-              <p class="project-kicker">Project 03</p>
+              <p class="project-kicker">Proyek 03</p>
               <h3>Tchat</h3>
               <p class="project-desc">
-                A modern, responsive, real-time chat app inspired by Telegram
-                and built on Material Expressive design principles.
+                Aplikasi chat real-time yang modern dan responsif, terinspirasi
+                Telegram dan dibangun dengan prinsip desain Material Expressive.
               </p>
-              <ul class="tech-list" aria-label="Technologies and approach">
+              <ul class="tech-list" aria-label="Teknologi dan pendekatan">
                 <li>Web App</li>
                 <li>Material Expressive</li>
                 <li>Gemini CLI</li>
               </ul>
               <ul class="project-highlights">
-                <li>Real-time messaging</li>
-                <li>Telegram-inspired look and feel</li>
-                <li>Material Expressive design</li>
+                <li>Perpesanan real-time</li>
+                <li>Tampilan terinspirasi Telegram</li>
+                <li>Desain Material Expressive</li>
               </ul>
               <div class="project-actions">
                 <a
@@ -328,7 +381,7 @@
                   target="_blank"
                   rel="noopener"
                 >
-                  Live Demo <span aria-hidden="true">&rarr;</span>
+                  Demo Langsung <span aria-hidden="true">&rarr;</span>
                 </a>
               </div>
             </div>
@@ -346,14 +399,14 @@
             </div>
 
             <div class="project-info">
-              <p class="project-kicker">Project 04</p>
+              <p class="project-kicker">Proyek 04</p>
               <h3>ChaNote</h3>
               <p class="project-desc">
-                A daily journaling app for building a writing habit, with moods,
-                an archive, and comments. Built as a Vanilla JS SPA using
-                localStorage and Material Design 3.
+                Aplikasi jurnal harian untuk membangun kebiasaan menulis, lengkap
+                dengan suasana hati, arsip, dan komentar. Dibangun sebagai SPA
+                JavaScript murni menggunakan localStorage dan Material Design 3.
               </p>
-              <ul class="tech-list" aria-label="Technologies and approach">
+              <ul class="tech-list" aria-label="Teknologi dan pendekatan">
                 <li>SPA</li>
                 <li>Vanilla JS</li>
                 <li>localStorage</li>
@@ -361,9 +414,9 @@
                 <li>Generative AI</li>
               </ul>
               <ul class="project-highlights">
-                <li>Mood tracking for daily entries</li>
-                <li>Archive and comments</li>
-                <li>Saved locally in the browser</li>
+                <li>Pelacakan suasana hati tiap entri</li>
+                <li>Arsip dan komentar</li>
+                <li>Tersimpan lokal di browser</li>
               </ul>
               <div class="project-actions">
                 <a
@@ -372,7 +425,7 @@
                   target="_blank"
                   rel="noopener"
                 >
-                  Live Demo <span aria-hidden="true">&rarr;</span>
+                  Demo Langsung <span aria-hidden="true">&rarr;</span>
                 </a>
               </div>
             </div>
@@ -381,7 +434,7 @@
       </section>
 
       <section id="certificates">
-        <h2 class="section-title hidden">Certificates</h2>
+        <h2 class="section-title hidden">Sertifikat</h2>
 
         <div class="cert-grid">
           <article class="cert-card hidden">
@@ -389,11 +442,11 @@
               type="button"
               class="cert-preview"
               data-cert-open
-              aria-label="Preview certificate: Public Lecture &ldquo;AI-Powered UI/UX&rdquo;"
+              aria-label="Pratinjau sertifikat: Public Lecture &ldquo;AI-Powered UI/UX&rdquo;"
             >
               <img
-                src="img/certificate/thumbs/ai-ux.jpg"
-                alt="AI-Powered UI/UX public lecture certificate from HIMATEK ITEBA"
+                src="assets/images/certificates/thumbs/ai-ux.jpg"
+                alt="Sertifikat kuliah umum &ldquo;AI-Powered UI/UX&rdquo; dari HIMATEK ITEBA"
                 width="900"
                 height="636"
                 loading="lazy"
@@ -410,14 +463,14 @@
             </button>
             <div class="cert-body">
               <h3>Public Lecture &ldquo;AI-Powered UI/UX&rdquo;</h3>
-              <p class="cert-meta">HIMATEK ITEBA &middot; November 2, 2026</p>
+              <p class="cert-meta">HIMATEK ITEBA &middot; 2 November 2026</p>
               <a
                 class="cert-link"
-                href="img/certificate/Tegar%20Izoelhaq%20(1).pdf"
+                href="assets/documents/certificates/Tegar%20Izoelhaq%20(1).pdf"
                 target="_blank"
                 rel="noopener"
               >
-                Open Certificate <span aria-hidden="true">&rarr;</span>
+                Buka Sertifikat <span aria-hidden="true">&rarr;</span>
               </a>
             </div>
           </article>
@@ -427,11 +480,11 @@
               type="button"
               class="cert-preview"
               data-cert-open
-              aria-label="Preview certificate: Public Lecture on Investment Opportunities in the Capital Market"
+              aria-label="Pratinjau sertifikat: Public Lecture on Investment Opportunities in the Capital Market"
             >
               <img
-                src="img/certificate/thumbs/pasar-modal.jpg"
-                alt="Public lecture certificate on investment opportunities and strategies for building financial futures, from ITEBA"
+                src="assets/images/certificates/thumbs/pasar-modal.jpg"
+                alt="Sertifikat kuliah umum tentang peluang investasi dan strategi membangun masa depan finansial, dari ITEBA"
                 width="900"
                 height="637"
                 loading="lazy"
@@ -448,14 +501,16 @@
             </button>
             <div class="cert-body">
               <h3>Public Lecture: Investment Opportunities in the Capital Market</h3>
-              <p class="cert-meta">Institut Teknologi Batam &middot; October 27, 2026</p>
+              <p class="cert-meta">
+                Institut Teknologi Batam &middot; 27 Oktober 2026
+              </p>
               <a
                 class="cert-link"
-                href="img/certificate/setifikat%20kuliah%20umum%20peluang%20investasi.pdf"
+                href="assets/documents/certificates/setifikat%20kuliah%20umum%20peluang%20investasi.pdf"
                 target="_blank"
                 rel="noopener"
               >
-                Open Certificate <span aria-hidden="true">&rarr;</span>
+                Buka Sertifikat <span aria-hidden="true">&rarr;</span>
               </a>
             </div>
           </article>
@@ -465,11 +520,11 @@
               type="button"
               class="cert-preview"
               data-cert-open
-              aria-label="Preview certificate: Webinar Basic Web Hacking"
+              aria-label="Pratinjau sertifikat: Webinar Basic Web Hacking"
             >
               <img
-                src="img/certificate/thumbs/web-hacking.jpg"
-                alt="Webinar certificate: Basic Web Hacking, From IDOR to Account Takeover, from BLUG"
+                src="assets/images/certificates/thumbs/web-hacking.jpg"
+                alt="Sertifikat webinar Basic Web Hacking, From IDOR to Account Takeover, dari BLUG"
                 width="900"
                 height="637"
                 loading="lazy"
@@ -487,16 +542,16 @@
             <div class="cert-body">
               <h3>Webinar Basic Web Hacking: From IDOR to Account Takeover</h3>
               <p class="cert-meta">
-                Cyber Division BLUG, Politeknik Negeri Batam &middot; October 24,
+                Cyber Division BLUG, Politeknik Negeri Batam &middot; 24 Oktober
                 2026
               </p>
               <a
                 class="cert-link"
-                href="img/certificate/Tegar%20Izoelhaq.pdf"
+                href="assets/documents/certificates/Tegar%20Izoelhaq.pdf"
                 target="_blank"
                 rel="noopener"
               >
-                Open Certificate <span aria-hidden="true">&rarr;</span>
+                Buka Sertifikat <span aria-hidden="true">&rarr;</span>
               </a>
             </div>
           </article>
@@ -506,11 +561,11 @@
               type="button"
               class="cert-preview"
               data-cert-open
-              aria-label="Preview certificate: Automation Webinar UiPath x IOH"
+              aria-label="Pratinjau sertifikat: Automation Webinar UiPath x IOH"
             >
               <img
-                src="img/certificate/thumbs/uipath.jpg"
-                alt="Automation Webinar certificate: UiPath x IOH, from ONE Indonesia"
+                src="assets/images/certificates/thumbs/uipath.jpg"
+                alt="Sertifikat Automation Webinar: UiPath x IOH, dari ONE Indonesia"
                 width="900"
                 height="637"
                 loading="lazy"
@@ -527,14 +582,14 @@
             </button>
             <div class="cert-body">
               <h3>Automation Webinar: UiPath x IOH</h3>
-              <p class="cert-meta">ONE Indonesia &middot; October 1, 2026</p>
+              <p class="cert-meta">ONE Indonesia &middot; 1 Oktober 2026</p>
               <a
                 class="cert-link"
-                href="img/certificate/Automation%20Webinar_%20UiPath%20x%20IOH%20held%20on%20October%201.%202026.pdf"
+                href="assets/documents/certificates/Automation%20Webinar_%20UiPath%20x%20IOH%20held%20on%20October%201.%202026.pdf"
                 target="_blank"
                 rel="noopener"
               >
-                Open Certificate <span aria-hidden="true">&rarr;</span>
+                Buka Sertifikat <span aria-hidden="true">&rarr;</span>
               </a>
             </div>
           </article>
@@ -542,9 +597,9 @@
       </section>
 
       <section id="contact">
-        <h2 class="section-title hidden">Let&rsquo;s Collaborate</h2>
+        <h2 class="section-title hidden">Mari Berkolaborasi</h2>
         <div class="card contact-card hidden">
-          <h3>Get in Touch</h3>
+          <h3>Hubungi Saya</h3>
           <ul class="contact-list">
             <li>
               <a
@@ -666,17 +721,20 @@
                     <circle cx="12" cy="10" r="3" />
                   </svg>
                 </span>
-                <span>Tiban, Batam, Riau Islands</span>
+                <span>Tiban, Batam, Kepulauan Riau</span>
               </div>
             </li>
           </ul>
-          <a href="mailto:mastegar618@gmail.com" class="btn">Send an Email</a>
+          <a href="mailto:mastegar618@gmail.com" class="btn">Kirim Email</a>
         </div>
       </section>
     </main>
 
     <footer>
-      <p>&copy; 2026 Tegar Izoelhaq. Built with vanilla HTML, CSS, and JavaScript.</p>
+      <p>
+        &copy; 2026 Tegar Izoelhaq. Dibangun dengan HTML, CSS, dan JavaScript
+        murni.
+      </p>
     </footer>
 
     <div
@@ -691,14 +749,14 @@
       <div class="cert-modal-panel">
         <div class="cert-modal-head">
           <div class="cert-modal-heading">
-            <h2 id="cert-modal-title">Certificate Preview</h2>
+            <h2 id="cert-modal-title">Pratinjau Sertifikat</h2>
             <p class="cert-modal-meta" data-cert-meta></p>
           </div>
           <button
             type="button"
             class="cert-modal-close"
             data-cert-close
-            aria-label="Close preview"
+            aria-label="Tutup pratinjau"
           >
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <line x1="6" y1="6" x2="18" y2="18" />
@@ -711,19 +769,21 @@
         </div>
         <div class="cert-modal-foot">
           <a class="btn" data-cert-href href="#" target="_blank" rel="noopener">
-            Open PDF <span aria-hidden="true">&rarr;</span>
+            Buka PDF <span aria-hidden="true">&rarr;</span>
           </a>
         </div>
       </div>
     </div>
-    <script src="script.js"></script>
+    <script src="assets/js/script.js"></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Tegar Izoelhaq",
-        "url": "https://tegar-izo.github.io",
+        "@id": "https://tegar-izo.github.io/#person",
+        "url": "https://tegar-izo.github.io/",
         "jobTitle": "Web Developer",
+        "knowsLanguage": ["id", "en"],
         "alumniOf": {
           "@type": "EducationalOrganization",
           "name": "SMAN 2 Tebo, Jambi"

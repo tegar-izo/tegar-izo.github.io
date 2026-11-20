@@ -1,12 +1,17 @@
-// Memuat halaman asli (index.html) apa adanya di jsdom, lalu menjalankan
-// script.js seperti di browser. Skrip tema di <head> ikut dieksekusi oleh
-// runScripts karena itu bagian dari perilaku yang diuji.
+// Memuat halaman asli apa adanya di jsdom, lalu menjalankan script.js seperti di
+// browser. Skrip tema di <head> ikut dieksekusi oleh runScripts karena itu
+// bagian dari perilaku yang diuji.
 import { readFileSync } from "node:fs";
 import { JSDOM } from "jsdom";
 
-const html = readFileSync(new URL("../../index.html", import.meta.url), "utf8");
+// Kedua versi bahasa diuji dengan kode yang sama; hanya berkas dan URL berbeda.
+const PAGES = {
+  id: { html: "../../index.html", url: "https://portfolio.test/" },
+  en: { html: "../../en/index.html", url: "https://portfolio.test/en/" },
+};
+
 const scriptSource = readFileSync(
-  new URL("../../script.js", import.meta.url),
+  new URL("../../assets/js/script.js", import.meta.url),
   "utf8",
 );
 
@@ -40,13 +45,19 @@ function createMediaQueryList(query, matches) {
   };
 }
 
-export function createPage({ systemLight = false, storedTheme = null } = {}) {
+export function createPage({
+  lang = "id",
+  systemLight = false,
+  storedTheme = null,
+} = {}) {
+  const page = PAGES[lang] ?? PAGES.id;
+  const html = readFileSync(new URL(page.html, import.meta.url), "utf8");
   const themeQuery = createMediaQueryList(
     "(prefers-color-scheme: light)",
     systemLight,
   );
   const dom = new JSDOM(html, {
-    url: "https://portfolio.test/",
+    url: page.url,
     runScripts: "dangerously",
     pretendToBeVisual: true,
     beforeParse(window) {

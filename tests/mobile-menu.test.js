@@ -2,8 +2,14 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { createPage } from "./helpers/page.js";
 
-function setup(t) {
-  const page = createPage();
+const LANGS = ["id", "en"];
+const LABELS = {
+  id: { open: "Buka menu", close: "Tutup menu" },
+  en: { open: "Open menu", close: "Close menu" },
+};
+
+function setup(t, lang) {
+  const page = createPage({ lang });
   t.after(() => page.close());
 
   const doc = page.document;
@@ -19,72 +25,74 @@ function setup(t) {
   };
 }
 
-test("hamburger membuka panel, mengunci scroll, dan menonaktifkan isi di belakang", (t) => {
-  const { page, doc, menu, toggle, backdrop, main, footer, firstLink } =
-    setup(t);
+for (const lang of LANGS) {
+  test(`[${lang}] hamburger membuka panel, mengunci scroll, dan menonaktifkan isi di belakang`, (t) => {
+    const { page, doc, menu, toggle, backdrop, main, footer, firstLink } =
+      setup(t, lang);
 
-  page.click(toggle);
+    page.click(toggle);
 
-  assert.ok(menu.classList.contains("active"));
-  assert.ok(backdrop.classList.contains("active"));
-  assert.equal(toggle.getAttribute("aria-expanded"), "true");
-  assert.equal(toggle.getAttribute("aria-label"), "Close menu");
-  assert.ok(doc.documentElement.classList.contains("menu-open"));
-  assert.ok(doc.body.classList.contains("menu-open"));
-  assert.equal(main.inert, true);
-  assert.equal(footer.inert, true);
-  assert.equal(doc.activeElement, firstLink, "fokus pindah ke link pertama");
-});
+    assert.ok(menu.classList.contains("active"));
+    assert.ok(backdrop.classList.contains("active"));
+    assert.equal(toggle.getAttribute("aria-expanded"), "true");
+    assert.equal(toggle.getAttribute("aria-label"), LABELS[lang].close);
+    assert.ok(doc.documentElement.classList.contains("menu-open"));
+    assert.ok(doc.body.classList.contains("menu-open"));
+    assert.equal(main.inert, true);
+    assert.equal(footer.inert, true);
+    assert.equal(doc.activeElement, firstLink, "fokus pindah ke link pertama");
+  });
 
-test("klik hamburger kedua menutup menu dan membuka kembali halaman", (t) => {
-  const { page, doc, menu, toggle, main, footer } = setup(t);
+  test(`[${lang}] klik hamburger kedua menutup menu dan membuka kembali halaman`, (t) => {
+    const { page, doc, menu, toggle, main, footer } = setup(t, lang);
 
-  page.click(toggle);
-  page.click(toggle);
+    page.click(toggle);
+    page.click(toggle);
 
-  assert.equal(menu.classList.contains("active"), false);
-  assert.equal(toggle.getAttribute("aria-expanded"), "false");
-  assert.equal(toggle.getAttribute("aria-label"), "Open menu");
-  assert.equal(doc.body.classList.contains("menu-open"), false);
-  assert.equal(main.inert, false);
-  assert.equal(footer.inert, false);
-});
+    assert.equal(menu.classList.contains("active"), false);
+    assert.equal(toggle.getAttribute("aria-expanded"), "false");
+    assert.equal(toggle.getAttribute("aria-label"), LABELS[lang].open);
+    assert.equal(doc.body.classList.contains("menu-open"), false);
+    assert.equal(main.inert, false);
+    assert.equal(footer.inert, false);
+  });
 
-test("Escape menutup menu yang sedang terbuka", (t) => {
-  const { page, menu, toggle } = setup(t);
+  test(`[${lang}] Escape menutup menu yang sedang terbuka`, (t) => {
+    const { page, menu, toggle } = setup(t, lang);
 
-  page.click(toggle);
-  page.pressKey("Escape");
+    page.click(toggle);
+    page.pressKey("Escape");
 
-  assert.equal(menu.classList.contains("active"), false);
-  assert.equal(toggle.getAttribute("aria-expanded"), "false");
-});
+    assert.equal(menu.classList.contains("active"), false);
+    assert.equal(toggle.getAttribute("aria-expanded"), "false");
+  });
 
-test("klik backdrop menutup menu", (t) => {
-  const { page, menu, toggle, backdrop } = setup(t);
+  test(`[${lang}] klik backdrop menutup menu`, (t) => {
+    const { page, menu, toggle, backdrop } = setup(t, lang);
 
-  page.click(toggle);
-  page.click(backdrop);
+    page.click(toggle);
+    page.click(backdrop);
 
-  assert.equal(menu.classList.contains("active"), false);
-});
+    assert.equal(menu.classList.contains("active"), false);
+  });
 
-test("klik link navigasi menutup menu", (t) => {
-  const { page, doc, menu, toggle, main, firstLink } = setup(t);
+  test(`[${lang}] klik link navigasi menutup menu`, (t) => {
+    const { page, doc, menu, toggle, main, firstLink } = setup(t, lang);
 
-  page.click(toggle);
-  page.click(firstLink);
+    page.click(toggle);
+    page.click(firstLink);
 
-  assert.equal(menu.classList.contains("active"), false);
-  assert.equal(doc.body.classList.contains("menu-open"), false);
-  assert.equal(main.inert, false);
-});
+    assert.equal(menu.classList.contains("active"), false);
+    assert.equal(doc.body.classList.contains("menu-open"), false);
+    assert.equal(main.inert, false);
+  });
 
-test("Escape tidak melakukan apa-apa saat menu tertutup", (t) => {
-  const { page, menu, toggle } = setup(t);
+  test(`[${lang}] Escape tidak melakukan apa-apa saat menu tertutup`, (t) => {
+    const { page, menu, toggle } = setup(t, lang);
 
-  page.pressKey("Escape");
+    page.pressKey("Escape");
 
-  assert.equal(menu.classList.contains("active"), false);
-  assert.equal(toggle.getAttribute("aria-expanded"), "false");
-});
+    assert.equal(menu.classList.contains("active"), false);
+    assert.equal(toggle.getAttribute("aria-expanded"), "false");
+  });
+}

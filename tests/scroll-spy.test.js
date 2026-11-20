@@ -2,6 +2,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { createPage } from "./helpers/page.js";
 
+const LANGS = ["id", "en"];
+
 const SECTION_TOP = {
   hero: 0,
   about: 800,
@@ -13,8 +15,8 @@ const SECTION_TOP = {
 
 const DOCUMENT_HEIGHT = 4400;
 
-function setupScrollSpy(t) {
-  const page = createPage();
+function setupScrollSpy(t, lang) {
+  const page = createPage({ lang });
   t.after(() => page.close());
 
   const { window, document: doc } = page;
@@ -62,40 +64,44 @@ function setupScrollSpy(t) {
   return { window, doc, links, scrollTo, activeLinks };
 }
 
-test("section aktif mengikuti posisi scroll", (t) => {
-  const { scrollTo, activeLinks } = setupScrollSpy(t);
+for (const lang of LANGS) {
+  test(`[${lang}] section aktif mengikuti posisi scroll`, (t) => {
+    const { scrollTo, activeLinks } = setupScrollSpy(t, lang);
 
-  scrollTo(0);
-  assert.deepEqual(activeLinks(), ["#hero"]);
+    scrollTo(0);
+    assert.deepEqual(activeLinks(), ["#hero"]);
 
-  scrollTo(600);
-  assert.deepEqual(activeLinks(), ["#about"]);
+    scrollTo(600);
+    assert.deepEqual(activeLinks(), ["#about"]);
 
-  scrollTo(1900);
-  assert.deepEqual(activeLinks(), ["#experience"]);
-});
+    scrollTo(1900);
+    assert.deepEqual(activeLinks(), ["#experience"]);
+  });
 
-test("hanya satu link ditandai dan aria-current hanya ada di link aktif", (t) => {
-  const { scrollTo, activeLinks, links } = setupScrollSpy(t);
+  test(`[${lang}] hanya satu link ditandai dan aria-current hanya ada di link aktif`, (t) => {
+    const { scrollTo, activeLinks, links } = setupScrollSpy(t, lang);
 
-  scrollTo(600);
-  assert.equal(activeLinks().length, 1);
+    scrollTo(600);
+    assert.equal(activeLinks().length, 1);
 
-  const [about] = links.filter(
-    (link) => link.getAttribute("href") === "#about",
-  );
-  assert.equal(about.getAttribute("aria-current"), "true");
+    const [about] = links.filter(
+      (link) => link.getAttribute("href") === "#about",
+    );
+    assert.equal(about.getAttribute("aria-current"), "true");
 
-  const others = links.filter((link) => link.getAttribute("href") !== "#about");
-  for (const link of others) {
-    assert.equal(link.hasAttribute("aria-current"), false);
-  }
-});
+    const others = links.filter(
+      (link) => link.getAttribute("href") !== "#about",
+    );
+    for (const link of others) {
+      assert.equal(link.hasAttribute("aria-current"), false);
+    }
+  });
 
-test("section terakhir menang saat halaman mentok di dasar", (t) => {
-  const { scrollTo, activeLinks } = setupScrollSpy(t);
+  test(`[${lang}] section terakhir menang saat halaman mentok di dasar`, (t) => {
+    const { scrollTo, activeLinks } = setupScrollSpy(t, lang);
 
-  // 3700 + 768 = 4468 >= 4400 - 2
-  scrollTo(3700);
-  assert.deepEqual(activeLinks(), ["#contact"]);
-});
+    // 3700 + 768 = 4468 >= 4400 - 2
+    scrollTo(3700);
+    assert.deepEqual(activeLinks(), ["#contact"]);
+  });
+}

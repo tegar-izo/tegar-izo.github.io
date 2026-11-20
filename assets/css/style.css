@@ -278,6 +278,47 @@ nav .logo {
 :root[data-theme="light"] .theme-toggle .icon-moon {
   display: block;
 }
+
+/* Pemilih bahasa: dua tautan statis. Bahasa aktif ditandai dengan pola yang
+   sama seperti menu aktif (warna aksen + garis bawah), tanpa bentuk baru. */
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Sora", Sans-Serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.lang-switch a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  min-height: 40px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+.lang-switch a:hover,
+.lang-switch a:focus-visible {
+  color: var(--primary);
+}
+
+.lang-switch a[aria-current="page"] {
+  color: var(--primary);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+}
+
+.lang-switch .lang-sep {
+  color: var(--text-muted);
+}
+
 nav ul {
   list-style: none;
   display: flex;
@@ -1291,6 +1332,10 @@ body.modal-open {
   .nav-right {
     gap: 8px;
   }
+  /* Di layar sentuh, tinggi tiap tautan bahasa disamakan dengan tombol lain. */
+  .lang-switch a {
+    min-height: 44px;
+  }
   footer {
     padding-bottom: calc(40px + env(safe-area-inset-bottom));
   }
@@ -1357,6 +1402,39 @@ body.modal-open {
     color: var(--primary);
     font-weight: 700;
     text-decoration: none;
+  }
+}
+
+/* Layar sangat sempit (<=380px): rapatkan navbar sedikit agar logo, pemilih
+   bahasa, dan kedua tombol tetap muat tanpa ada yang terpotong. */
+@media (max-width: 380px) {
+  nav {
+    padding-left: calc(12px + env(safe-area-inset-left));
+    padding-right: calc(12px + env(safe-area-inset-right));
+  }
+  nav .logo {
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+  }
+  .nav-right {
+    gap: 6px;
+  }
+  .lang-switch {
+    gap: 5px;
+    font-size: 0.78rem;
+  }
+  .lang-switch a {
+    min-width: 20px;
+  }
+}
+
+/* Di bawah 340px logo dan pemilih bahasa sudah bersentuhan; beri jarak lagi. */
+@media (max-width: 340px) {
+  nav .logo {
+    font-size: 1.02rem;
+  }
+  .nav-right {
+    gap: 5px;
   }
 }
 
