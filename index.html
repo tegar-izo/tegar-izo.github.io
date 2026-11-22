@@ -7,6 +7,13 @@
       // Tema ditentukan sebelum render agar tidak ada kedip antar tema.
       // Urutan prioritas: pilihan manual (localStorage), lalu preferensi sistem.
       (() => {
+        // Penanda bahwa animasi reveal bisa berjalan. CSS hanya menyembunyikan
+        // konten berkelas .hidden saat <html> punya kelas ini, sehingga tanpa
+        // JavaScript (atau tanpa IntersectionObserver) konten tetap terlihat.
+        if ("IntersectionObserver" in window) {
+          document.documentElement.classList.add("js");
+        }
+
         let stored = null;
         try {
           stored = localStorage.getItem("theme");
@@ -466,7 +473,7 @@
               <p class="cert-meta">HIMATEK ITEBA &middot; 2 November 2026</p>
               <a
                 class="cert-link"
-                href="assets/documents/certificates/Tegar%20Izoelhaq%20(1).pdf"
+                href="assets/documents/certificates/sertifikat-kuliah-umum-ai-powered-uiux-himatek-iteba-2026-11-02.pdf"
                 target="_blank"
                 rel="noopener"
               >
@@ -506,7 +513,7 @@
               </p>
               <a
                 class="cert-link"
-                href="assets/documents/certificates/setifikat%20kuliah%20umum%20peluang%20investasi.pdf"
+                href="assets/documents/certificates/sertifikat-kuliah-umum-peluang-investasi-pasar-modal-iteba-2026-10-27.pdf"
                 target="_blank"
                 rel="noopener"
               >
@@ -547,7 +554,7 @@
               </p>
               <a
                 class="cert-link"
-                href="assets/documents/certificates/Tegar%20Izoelhaq.pdf"
+                href="assets/documents/certificates/sertifikat-webinar-basic-web-hacking-blug-polibatam-2026-10-24.pdf"
                 target="_blank"
                 rel="noopener"
               >
@@ -585,7 +592,7 @@
               <p class="cert-meta">ONE Indonesia &middot; 1 Oktober 2026</p>
               <a
                 class="cert-link"
-                href="assets/documents/certificates/Automation%20Webinar_%20UiPath%20x%20IOH%20held%20on%20October%201.%202026.pdf"
+                href="assets/documents/certificates/sertifikat-webinar-automation-uipath-x-ioh-one-indonesia-2026-10-01.pdf"
                 target="_blank"
                 rel="noopener"
               >

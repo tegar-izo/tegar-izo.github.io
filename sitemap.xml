@@ -1,27 +1,44 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+>
   <url>
     <loc>https://tegar-izo.github.io/</loc>
+    <lastmod>2026-11-22</lastmod>
+    <xhtml:link
+      rel="alternate"
+      hreflang="id"
+      href="https://tegar-izo.github.io/"
+    />
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://tegar-izo.github.io/en/"
+    />
+    <xhtml:link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://tegar-izo.github.io/"
+    />
   </url>
   <url>
-    <loc>https://tegar-izo.github.io/ChaNote/</loc>
-  </url>
-  <url>
-    <loc>https://tegar-izo.github.io/img/certificate/Tegar%20Izoelhaq%20%281%29.pdf</loc>
-  </url>
-  <url>
-    <loc>https://tegar-izo.github.io/img/certificate/setifikat%20kuliah%20umum%20peluang%20investasi.pdf</loc>
-  </url>
-  <url>
-    <loc>https://tegar-izo.github.io/img/certificate/Tegar%20Izoelhaq.pdf</loc>
-  </url>
-  <url>
-    <loc>https://tegar-izo.github.io/img/certificate/Automation%20Webinar_%20UiPath%20x%20IOH%20held%20on%20October%201.%202026.pdf</loc>
-  </url>
-  <url>
-    <loc>https://tegar-izo.github.io/uangku/</loc>
-  </url>
-  <url>
-    <loc>https://tegar-izo.github.io/Tchat/</loc>
+    <loc>https://tegar-izo.github.io/en/</loc>
+    <lastmod>2026-11-22</lastmod>
+    <xhtml:link
+      rel="alternate"
+      hreflang="id"
+      href="https://tegar-izo.github.io/"
+    />
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://tegar-izo.github.io/en/"
+    />
+    <xhtml:link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://tegar-izo.github.io/"
+    />
   </url>
 </urlset>

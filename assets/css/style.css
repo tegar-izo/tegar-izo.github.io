@@ -359,14 +359,17 @@ section {
   color: var(--text-light);
 }
 
-/* ANIMASI (dikendalikan JS) */
-.hidden {
+/* ANIMASI (dikendalikan JS)
+   <html> hanya mendapat kelas .js bila IntersectionObserver tersedia (dipasang
+   skrip di <head>). Tanpa JavaScript kelas itu tidak ada, sehingga konten tidak
+   pernah disembunyikan dan halaman tetap terbaca utuh. */
+.js .hidden {
   opacity: 0;
   transform: translateY(30px);
   transition: all 0.8s ease-out;
 }
 
-.show {
+.js .hidden.show {
   opacity: 1;
   transform: translateY(0);
 }
@@ -1448,7 +1451,7 @@ body.modal-open {
     animation-iteration-count: 1 !important;
   }
 
-  .hidden {
+  .js .hidden {
     opacity: 1;
     transform: none;
   }
